@@ -1,0 +1,45 @@
+.footer {
+    background-color: #222;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .footerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logoContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logoContainer img {
+    margin-right: 10px;
+  }
+  
+  .footerLinks button {
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 20px;
+  }
+  
+  .footerLinks button:hover {
+    text-decoration: underline;
+  }
+  
+  .footerBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .footerBottom p {
+    margin: 0;
+  }
+  
