@@ -31,7 +31,7 @@ function App() {
         </header>
         <div className='homeComponent'>
         <Routes>
-          <Route index element={<HomeWithMap setLat={setLat} setLon={setLon} lat={lat} lon={lon} />} />
+          <Route path='/' element={<HomeWithMap setLat={setLat} setLon={setLon} lat={lat} lon={lon} />} />
           <Route path="/hurricane" element={<HurricanePage />} />
           <Route path="/earthquake" element={<EarthquakePage />} />
           <Route path="/flood" element={<FloodPage />} />
