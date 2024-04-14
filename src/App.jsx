@@ -30,16 +30,15 @@ function App() {
           </div>
         </header>
         <div className='homeComponent'>
-          <Routes>
-            {/* Pass setLat and setLon as props to HomeWithMap */}
-            <Route exact path="/" element={<HomeWithMap setLat={setLat} setLon={setLon} lat={lat} lon={lon} />} />
-            <Route path="/hurricane" element={<HurricanePage />} />
-            <Route path="/earthquake" element={<EarthquakePage />} />
-            <Route path="/flood" element={<FloodPage />} />
-            <Route path="/trend-analysis" element={<TrendAnalysisPage />} />
-            <Route path="/news-coverage" element={<NewsCoveragePage />} />
-            <Route path="/about" element={<AboutPage />} />
-          </Routes>
+        <Routes>
+          <Route index element={<HomeWithMap setLat={setLat} setLon={setLon} lat={lat} lon={lon} />} />
+          <Route path="/hurricane" element={<HurricanePage />} />
+          <Route path="/earthquake" element={<EarthquakePage />} />
+          <Route path="/flood" element={<FloodPage />} />
+          <Route path="/trend-analysis" element={<TrendAnalysisPage />} />
+          <Route path="/news-coverage" element={<NewsCoveragePage />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
         </div>
         <Footer />
       </div>
