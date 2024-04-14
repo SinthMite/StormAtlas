@@ -15,8 +15,12 @@ import AboutPage from './AboutPage.jsx';
 function App() {
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
+
+  // Manually specify the base URL (change '/myapp' to match your deployment)
+  const baseUrl = '/';
+
   return (
-    <Router>
+    <Router basename={baseUrl}>
       <div className='homePage'>
         <header>
           <div className='logoSide'>
@@ -30,15 +34,15 @@ function App() {
           </div>
         </header>
         <div className='homeComponent'>
-        <Routes>
-          <Route path='/' element={<HomeWithMap setLat={setLat} setLon={setLon} lat={lat} lon={lon} />} />
-          <Route path="/hurricane" element={<HurricanePage />} />
-          <Route path="/earthquake" element={<EarthquakePage />} />
-          <Route path="/flood" element={<FloodPage />} />
-          <Route path="/trend-analysis" element={<TrendAnalysisPage />} />
-          <Route path="/news-coverage" element={<NewsCoveragePage />} />
-          <Route path="/about" element={<AboutPage />} />
-        </Routes>
+          <Routes>
+            <Route path="/StormAtlas" element={<HomeWithMap setLat={setLat} setLon={setLon} lat={lat} lon={lon} />} />
+            <Route path="/hurricane" element={<HurricanePage />} />
+            <Route path="/earthquake" element={<EarthquakePage />} />
+            <Route path="/flood" element={<FloodPage />} />
+            <Route path="/trend-analysis" element={<TrendAnalysisPage />} />
+            <Route path="/news-coverage" element={<NewsCoveragePage />} />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
         </div>
         <Footer />
       </div>
