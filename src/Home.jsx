@@ -3,7 +3,7 @@ import BackGroundVideo from './assets/BackGround.mp4';
 import './Home.css';
 
 const API_KEY_OPENWEATHERMAP = "c02c81c69aeca3d86e9118215a9f3cca";
-const API_KEY_NEWSAPI = "3lfp6bp370RvsLMiOurYrKFCC2sKHFXDdqdwtizO";
+const API_KEY_NEWSAPI = "pub_4209530ee2e4b7b0baaf460bdb8c7b4869283";
 
 const Home = ({ setLat, setLon }) => {
     const videoRef = useRef(null);
@@ -48,22 +48,22 @@ const Home = ({ setLat, setLon }) => {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await fetch(`https://api.thenewsapi.com/v1/news/all?api_token=${API_KEY_NEWSAPI}&language=en&limit=3`);
+                const response = await fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY_NEWSAPI}&category=environment`);
                 if (response.ok) {
                     const data = await response.json();
-                    const scienceNews = data.data.filter(article => article.categories.includes("science"));
-                    setScienceNews(scienceNews);
+                    console.log("News Data:", data); // Log the data
+                    setScienceNews(data); // Update state with news data
                 } else {
                     throw new Error('Error fetching news data');
                 }
             } catch (error) {
+                console.error('Error fetching news data:', error); // Log detailed error
                 setError('Error fetching news data. Please try again later.');
             }
         };
-
+    
         fetchNews();
     }, []);
-
     useEffect(() => {
         if (videoRef.current) {
             videoRef.current.play().catch(error => console.error('Error playing video:', error));
@@ -133,12 +133,33 @@ const Home = ({ setLat, setLon }) => {
             throw error;
         }
     };
-
+console.log(scienceNews.results)
     return (
         <div className='mainDiv'>
 
 
             <section className='basicInfo'>
+
+                <div className='newsContainer'>
+                    <h2>Science News</h2>
+                    {scienceNews.results && scienceNews.results.length > 0 ? (
+                        <ul>
+                            {scienceNews.results.map((article, index) => (
+                                <li key={index}>
+                                    <a href={article.link} target="_blank" rel="noopener noreferrer">
+                                        <img src={article.image_url} alt={article.title} />
+                                        <h2>{article.title}</h2>
+                                        <p>{article.description}</p>
+                                        <p>{article.creator ? article.creator : 'No Author'}</p>
+                                        <p>{article.pubDate}</p>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>No science news available</p>
+                    )}
+                </div>
                 <div className='weatherContainer'>
                     <form onSubmit={handleSubmit}>
                         <input
@@ -161,20 +182,6 @@ const Home = ({ setLat, setLon }) => {
                             <p>Description: {description}</p>
                             <p>Humidity: {humidity}</p>
                         </div>
-                    )}
-                </div>
-                <div className='newsContainer'>
-                    <h2>Science News</h2>
-                    {scienceNews.length > 0 ? (
-                        <ul>
-                            {scienceNews.map((article, index) => (
-                                <li key={index}>
-                                    <a href={article.url} target="_blank" rel="noopener noreferrer">{article.title}</a>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>No science news available</p>
                     )}
                 </div>
             </section>

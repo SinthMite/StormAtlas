@@ -1,14 +1,4 @@
-.basicInfo {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
 
-@media only screen and (max-width: 600px) {
-    .basicInfo {
-        justify-content: center;
-    }
-}
 video{
     filter: brightness(40%); /* Adjust the percentage to darken or lighten the video */
     width: 100%;
@@ -51,13 +41,54 @@ h2{
 }
   
 
-.basicInfo{
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    justify-content: space-between;
-}
-
 #homeWeather{
     
 }
+
+
+.newsContainer {
+    overflow: hidden;
+    min-width: 100%; /* Ensure it doesn't exceed container width */
+  }
+  
+  .newsContainer ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: nowrap; /* Ensure items don't wrap to the next line */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Enable snapping to each item */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+  }
+  
+  .newsContainer ul li {
+    flex: 0 0 auto; /* Ensure items don't grow or shrink */
+    margin-right: 20px; /* Adjust spacing between news items */
+    scroll-snap-align: start; /* Snap each item to the start of the container */
+    width: 100%; /* Set a fixed width for each news item */
+  }
+  
+  .newsContainer ul li:last-child {
+    margin-right: 0; /* Remove margin from the last item to avoid extra space */
+  }
+  
+  .newsContainer img {
+    min-width: 100%;
+    height: 200px; /* Set a fixed height for the images */
+    object-fit: cover; /* Ensure images maintain aspect ratio and cover the entire space */
+  }
+  
+  .newsContainer h2 {
+    margin: 10px 0;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis (...) for long text */
+  }
+  
+  .newsContainer p {
+    margin: 5px 0;
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis (...) for long text */
+  }
+  
