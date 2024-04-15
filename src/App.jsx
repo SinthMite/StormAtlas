@@ -23,14 +23,18 @@ function App() {
     <Router basename={baseUrl}>
       <div className='homePage'>
         <header>
-          <div className='logoSide'>
-            <img src={Logo} alt="logo" width='80px' id='logo'/>
-            <h1>StormAtlas</h1>
+          <div className='headerDiv'>
+            <div className='logoSide'>
+              <h1>StormAtlas</h1>
+            </div>
+            <div className='headerbutton'>
+              <Link to="/StormAtlas"><button id='homeButton'>Home</button></Link>
+              <Link to="/options"><button>Options</button></Link>
+              <Link to="/about"><button>About</button></Link>
+            </div>
           </div>
-          <div className='headerbutton'>
-            <Link to="/StormAtlas"><button id='homeButton'>Home</button></Link>
-            <Link to="/options"><button>Options</button></Link>
-            <Link to="/about"><button>About</button></Link>
+          <div>
+          <h2 className='subHeader'>Amidst Troubling Times, Seek Refuge in the Sheltering Arms of StormAtlas</h2>
           </div>
         </header>
         <div className='homeComponent'>

@@ -1,4 +1,14 @@
+.basicInfo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
 
+@media only screen and (max-width: 600px) {
+    .basicInfo {
+        justify-content: center;
+    }
+}
 video{
     filter: brightness(40%); /* Adjust the percentage to darken or lighten the video */
     width: 100%;
@@ -8,54 +18,34 @@ video{
 h2{
     font-size: 1.5em;
     font-weight: 500;
-    color: rgb(238, 238, 238);
-}
-.textDiv {
-    position: relative;
-}
-
-.textDiv video {
-    width: 100%; /* Adjust width as needed */
-    height: auto; /* Adjust height as needed */
-}
-
-.subHeader {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: hsla(0, 0%, 100%, 0.5); /* Adjust text color as needed */
-    font-size: 2rem; /* Adjust font size as needed */
-    text-align: center;
-    z-index: 2; /* Ensure the text appears above the video */
-    width: 80%; /* Adjust width as needed */
+    color: rgb(86, 86, 120);
 }
 
 .weatherContainer{
-background: rgba(255, 255, 255, 0);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-backdrop-filter: blur(9.8px);
--webkit-backdrop-filter: blur(9.8px);
-border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(213, 99, 126, 0.19);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.2px);
+    -webkit-backdrop-filter: blur(6.2px);
+    border: 1px solid rgba(213, 99, 126, 0.52);
     display: flex;
     flex-direction: column;
     width: 300px;
-    color: white;
+    color: rgb(86, 86, 120);
     padding-left: 1rem;
 }
 
 .newsContainer{
-    background: rgba(255, 255, 255, 0);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-backdrop-filter: blur(9.8px);
--webkit-backdrop-filter: blur(9.8px);
-border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(213, 99, 126, 0.19);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.2px);
+    -webkit-backdrop-filter: blur(6.2px);
+    border: 1px solid rgba(213, 99, 126, 0.52);
     display: flex;
     flex-direction: column;
     width: 300px;
-    color: white;
+    color: rgb(86, 86, 120);
     padding-left: 1rem;
 
 }
