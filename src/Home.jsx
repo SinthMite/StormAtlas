@@ -136,14 +136,14 @@ const Home = ({ setLat, setLon }) => {
 
     return (
         <div className='mainDiv'>
-            {/*<div className="videoDiv">
+            <div className="videoDiv">
+
+            </div>
+            <div className="textDiv">
                 <video ref={videoRef} autoPlay loop muted>
                     <source src={BackGroundVideo} type="video/mp4" />
-                    Your browser does not support the video tag.
                 </video>
-            </div>*/}
-            <div className="textDiv">
-                <h2>Amidst Troubling Times, Seek Refuge in the Sheltering Arms of StormAtlas</h2>
+                <h2 className='subHeader'>Amidst Troubling Times, Seek Refuge in the Sheltering Arms of StormAtlas</h2>
             </div>
             <section className='basicInfo'>
                 <div className='weatherContainer'>

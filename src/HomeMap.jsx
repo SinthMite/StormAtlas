@@ -12,7 +12,7 @@ export default function HomeMap({ lat, lon }) {
     function PanToMarker() {
         const map = useMap();
         useEffect(() => {
-            map.flyTo(position, 13, {
+            map.flyTo(position, 8, {
                 duration: 2, // Duration of the animation in seconds
             });
         }, [map, position]);
@@ -22,7 +22,7 @@ export default function HomeMap({ lat, lon }) {
 
     return (
         <div className='MapContainer'>
-            <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{ height: "400px", width: "100%" }}>
+            <MapContainer center={position} zoom={-100} scrollWheelZoom={true} style={{ height: "400px", width: "100%" }}>
                 <PanToMarker />
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -30,6 +30,10 @@ export default function HomeMap({ lat, lon }) {
                 />
                 <TileLayer
                     url={`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${apiKey}`}
+                />
+                                
+                <TileLayer
+                    url={`https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=${apiKey}`}
                 />
                 <Marker position={position}>
                     <Popup>

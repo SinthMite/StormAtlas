@@ -28,7 +28,7 @@ function App() {
             <h1>StormAtlas</h1>
           </div>
           <div className='headerbutton'>
-            <Link to="/"><button id='homeButton'>Home</button></Link>
+            <Link to="/StormAtlas"><button id='homeButton'>Home</button></Link>
             <Link to="/options"><button>Options</button></Link>
             <Link to="/about"><button>About</button></Link>
           </div>
