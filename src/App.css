@@ -22,7 +22,7 @@ header {
   border-radius: 0rem 0rem 0rem 6rem;
 }
 .headerDiv{
-  display: flex;
+  display: flex;  
   justify-content: space-between;
   align-items: center;
 }
@@ -31,14 +31,14 @@ header {
   background-color: transparent;
 }
 #homeButton{
-  background-color: #fde9f5;
+  background-color: #b5e1ef;
 }
 #logo{
   width: 100px;
   height: 100px;
 }
 .logoSide{
-  display: flex;
+  margin-right: 2rem;
 }
 
 h1{
