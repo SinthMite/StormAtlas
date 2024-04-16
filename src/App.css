@@ -63,3 +63,12 @@ footer{
   flex-direction: column;
   justify-content: center;
 }
+
+.dropDown{
+  position: absolute;
+  z-index: 1000;
+  transform: translate(40%);
+  top: 10%;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+}

@@ -15,6 +15,7 @@ import AboutPage from './AboutPage.jsx';
 function App() {
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   // Manually specify the base URL (change '/myapp' to match your deployment)
   const baseUrl = '/';
@@ -29,7 +30,8 @@ function App() {
             </div>
             <div className='headerbutton'>
               <Link to="/StormAtlas"><button id='homeButton'>Home</button></Link>
-              <Link to="/options"><button>Options</button></Link>
+              <button onClick={() => setShowDropdown(!showDropdown)}>Options</button>
+              {showDropdown && <DropDown />}
               <Link to="/about"><button>About</button></Link>
             </div>
           </div>
@@ -40,11 +42,7 @@ function App() {
         <div className='homeComponent'>
           <Routes>
             <Route path="/StormAtlas" element={<HomeWithMap setLat={setLat} setLon={setLon} lat={lat} lon={lon} />} />
-            <Route path="/hurricane" element={<HurricanePage />} />
-            <Route path="/earthquake" element={<EarthquakePage />} />
-            <Route path="/flood" element={<FloodPage />} />
-            <Route path="/trend-analysis" element={<TrendAnalysisPage />} />
-            <Route path="/news-coverage" element={<NewsCoveragePage />} />
+
             <Route path="/about" element={<AboutPage />} />
           </Routes>
         </div>
@@ -59,6 +57,20 @@ function HomeWithMap({ setLat, setLon, lat, lon }) {
     <div>
       <Home setLat={setLat} setLon={setLon} />
       <HomeMap lat={lat} lon={lon} />
+    </div>
+  );
+}
+
+function DropDown() {
+  return (
+    <div className='dropDown'>
+      <ul className='dropDownList'>
+        <li><Link to="/hurricane">Hurricane</Link></li>
+        <li><Link to="/earthquake">Earthquake</Link></li>
+        <li><Link to="/flood">Flood</Link></li>
+        <li><Link to="/trend-analysis">Trend Analysis</Link></li>
+        <li><Link to="/news-coverage">News Coverage</Link></li>
+      </ul>
     </div>
   );
 }
