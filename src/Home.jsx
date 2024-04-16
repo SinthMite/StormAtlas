@@ -48,7 +48,7 @@ const Home = ({ setLat, setLon }) => {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY_NEWSAPI}&category=environment`);
+                const response = await fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY_NEWSAPI}&language=en&category=education,environment,health,science,technology`);
                 if (response.ok) {
                     const data = await response.json();
                     console.log("News Data:", data); // Log the data
