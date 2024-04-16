@@ -149,9 +149,7 @@ console.log(scienceNews.results)
                                     <a href={article.link} target="_blank" rel="noopener noreferrer">
                                         <img src={article.image_url} alt={article.title} />
                                         <h2>{article.title}</h2>
-                                        <p>{article.description}</p>
                                         <p>{article.creator ? article.creator : 'No Author'}</p>
-                                        <p>{article.pubDate}</p>
                                     </a>
                                 </li>
                             ))}
