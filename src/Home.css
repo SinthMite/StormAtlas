@@ -1,35 +1,26 @@
 
-video{
-    filter: brightness(40%); /* Adjust the percentage to darken or lighten the video */
-    width: 100%;
-    position: relative;
-}
+
 
 h2{
     font-size: 1.5em;
     font-weight: 500;
-    color: rgb(86, 86, 120);
+    color: rgb(255, 255, 255);
 }
 
 .weatherContainer{
-    background: rgba(213, 99, 126, 0.19);
+    background: rgb(34, 91, 151);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(6.2px);
-    -webkit-backdrop-filter: blur(6.2px);
-    border: 1px solid rgba(213, 99, 126, 0.52);
+    color: #fff;
     display: flex;
     flex-direction: column;
     width: 300px;
-    color: rgb(86, 86, 120);
-    padding-left: 1rem;
+    padding: 1rem;
 }
 
 .newsContainer{
-    background: rgba(213, 99, 126, 0.19);
+    background: rgb(34, 91, 151);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(6.2px);
-    -webkit-backdrop-filter: blur(6.2px);
-    border: 1px solid rgba(213, 99, 126, 0.52);
+    color: #fff;
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -90,3 +81,18 @@ h2{
     text-overflow: ellipsis; /* Add ellipsis (...) for long text */
   }
   
+
+  .weatherContainer input{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #fff;
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+    background-color: transparent;
+  }
+  .weatherContainer input::placeholder{
+    color: #fff;
+ 
+  }

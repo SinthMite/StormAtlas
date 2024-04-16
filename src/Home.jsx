@@ -70,29 +70,7 @@ const Home = ({ setLat, setLon }) => {
         }
     }, []);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        setError('');
-        try {
-            setLoading(true);
-            const geoResponse = await fetchGeo();
-            if (geoResponse) {
-                const weatherData = await fetchWeather(geoResponse.lat, geoResponse.lon);
-                if (weatherData) {
-                    setCityName(weatherData.cityName);
-                    setTemperature(weatherData.temperature);
-                    setDescription(weatherData.description.toUpperCase());
-                    setHumidity(weatherData.humidity);
-                    setLat(geoResponse.lat);
-                    setLon(geoResponse.lon);
-                }
-            }
-        } catch (error) {
-            setError('Error fetching weather data. Please enter a valid ZIP code.');
-        } finally {
-            setLoading(false);
-        }
-    };
+
 
     const handleChange = (event) => {
         setZipCode(event.target.value);
@@ -143,23 +121,25 @@ console.log(scienceNews.results)
                 <div className='newsContainer'>
                     <h2>Science News</h2>
                     {scienceNews.results && scienceNews.results.length > 0 ? (
-                        <ul>
-                            {scienceNews.results.map((article, index) => (
-                                <li key={index}>
-                                    <a href={article.link} target="_blank" rel="noopener noreferrer">
-                                        <img src={article.image_url} alt={article.title} />
-                                        <h2>{article.title}</h2>
-                                        <p>{article.creator ? article.creator : 'No Author'}</p>
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>No science news available</p>
-                    )}
+    <ul>
+        {scienceNews.results
+            .filter(article => article.image_url) // Filter out articles with no image
+            .map((article, index) => (
+                <li key={index}>
+                    <a href={article.link} target="_blank" rel="noopener noreferrer">
+                        <img src={article.image_url} alt={article.title} />
+                        <h2>{article.title}</h2>
+                        <p>{article.creator ? article.creator : 'No Author'}</p>
+                    </a>
+                </li>
+            ))}
+    </ul>
+) : (
+    <p>No science news available</p>
+)}
                 </div>
                 <div className='weatherContainer'>
-                    <form onSubmit={handleSubmit}>
+                    <form>
                         <input
                             type="text"
                             value={zipCode}
@@ -167,7 +147,6 @@ console.log(scienceNews.results)
                             placeholder="Enter ZIP code"
                             id='homeWeather'
                         />
-                        <button type="submit">Search</button>
                     </form>
                     {error && <p className="error">{error}</p>}
                     {loading ? (
