@@ -9,7 +9,18 @@ export default function EarthquakePage() {
     const [earthquakeDataHour, setEarthquakeDataHour] = useState([]);
     const [earthquakeDataDay, setEarthquakeDataDay] = useState([]);
     const [earthquakeDataWeek, setEarthquakeDataWeek] = useState([]);
+    const [radius, setRadius] = useState(10); // Initial radius
     const position = [51.505, -0.09]; // Default position
+
+    useEffect(() => {
+        // Function to update radius gradually
+        const interval = setInterval(() => {
+            // Increase radius up to a maximum value (e.g., 50)
+            setRadius(prevRadius => prevRadius < 50 ? prevRadius + 1 : 10);
+        }, 20); // Update every 100 milliseconds
+
+        return () => clearInterval(interval); // Cleanup function to clear interval
+    }, []); // Run only once on component mount
 
     useEffect(() => {
         const fetchHourData = async () => {
@@ -33,7 +44,7 @@ export default function EarthquakePage() {
     useEffect(() => {
         const fetchDayData = async () => {
             try {
-                const response = await fetch(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson`);
+                const response = await fetch(`https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_day.geojson`);
                 if (response.ok) {
                     const data = await response.json();
                     console.log("Day Data:", data); // Log the data
@@ -82,7 +93,7 @@ export default function EarthquakePage() {
                     />
                     {/* Display earthquake circle markers */}
                     {earthquakeDataHour.map((quake, index) => (
-                        <CircleMarker key={index} center={[quake.geometry.coordinates[1], quake.geometry.coordinates[0]]} radius={50}>
+                        <CircleMarker key={index} center={[quake.geometry.coordinates[1], quake.geometry.coordinates[0]]} radius={radius}>
                             <Popup>
                                 Magnitude: {quake.properties.mag}<br />
                                 Location: {quake.properties.place}
@@ -91,7 +102,7 @@ export default function EarthquakePage() {
                     ))}
                 </MapContainer>
             </div>
-            <h2>Earthquakes within the day</h2>
+            <h2>Significant Earthquakes within the day</h2>
             <div className='EarthQuakeContainer'>
                 <MapContainer center={position} zoom={5} scrollWheelZoom={true} style={{ height: "400px", width: "100%" }}>
                     <TileLayer
@@ -100,7 +111,7 @@ export default function EarthquakePage() {
                     />
                     {/* Display earthquake circle markers */}
                     {earthquakeDataDay.map((quake, index) => (
-                        <CircleMarker key={index} center={[quake.geometry.coordinates[1], quake.geometry.coordinates[0]]} radius={50}>
+                        <CircleMarker key={index} center={[quake.geometry.coordinates[1], quake.geometry.coordinates[0]]} radius={radius}>
                             <Popup>
                                 Magnitude: {quake.properties.mag}<br />
                                 Location: {quake.properties.place}
@@ -118,7 +129,7 @@ export default function EarthquakePage() {
                     />
                     {/* Display earthquake circle markers */}
                     {earthquakeDataWeek.map((quake, index) => (
-                        <CircleMarker key={index} center={[quake.geometry.coordinates[1], quake.geometry.coordinates[0]]} radius={50}>
+                        <CircleMarker key={index} center={[quake.geometry.coordinates[1], quake.geometry.coordinates[0]]} radius={radius}>
                             <Popup>
                                 Magnitude: {quake.properties.mag}<br />
                                 Location: {quake.properties.place}
