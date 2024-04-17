@@ -59,19 +59,17 @@ function HomeWithMap() {
     </div>
   );
 }
-
 function DropDown() {
   return (
     <div className='dropDown'>
       <ul className='dropDownList'>
-        <li><Link to="/hurricane">Hurricane</Link></li>
-        <li><Link to="/earthquake">Earthquake</Link></li>
-        <li><Link to="/flood">Flood</Link></li>
-        <li><Link to="/trend-analysis">Trend Analysis</Link></li>
-        <li><Link to="/news-coverage">News Coverage</Link></li>
+        <li><Link className='linkItem' to="/hurricane">Hurricane</Link></li>
+        <li><Link className='linkItem' to="/earthquake">Earthquake</Link></li>
+        <li><Link className='linkItem' to="/flood">Flood</Link></li>
+        <li><Link className='linkItem' to="/trend-analysis">Trend Analysis</Link></li>
+        <li><Link className='linkItem' to="/news-coverage">News Coverage</Link></li>
       </ul>
     </div>
   );
 }
-
 export default App;
