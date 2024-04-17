@@ -17,7 +17,7 @@ const Home = ({ setLat, setLon }) => {
     const [error, setError] = useState('');
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
-
+    console.log(longitude)
     useEffect(() => {
         const fetchData = async () => {
             if (zipCode.trim() === '') return; // Skip fetching if zipCode is empty
@@ -71,6 +71,29 @@ const Home = ({ setLat, setLon }) => {
     }, []);
 
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setError('');
+        try {
+            setLoading(true);
+            const geoResponse = await fetchGeo();
+            if (geoResponse) {
+                const weatherData = await fetchWeather(geoResponse.lat, geoResponse.lon);
+                if (weatherData) {
+                    setCityName(weatherData.cityName);
+                    setTemperature(weatherData.temperature);
+                    setDescription(weatherData.description.toUpperCase());
+                    setHumidity(weatherData.humidity);
+                    setLat(geoResponse.lat);
+                    setLon(geoResponse.lon);
+                }
+            }
+        } catch (error) {
+            setError('Error fetching weather data. Please enter a valid ZIP code.');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleChange = (event) => {
         setZipCode(event.target.value);
@@ -139,7 +162,7 @@ console.log(scienceNews.results)
 )}
                 </div>
                 <div className='weatherContainer'>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <input
                             type="text"
                             value={zipCode}
@@ -147,6 +170,9 @@ console.log(scienceNews.results)
                             placeholder="Enter ZIP code"
                             id='homeWeather'
                         />
+                        <button type="submit" disabled={loading}>
+                            {loading? 'Loading...' : 'Submit'}
+                        </button>
                     </form>
                     {error && <p className="error">{error}</p>}
                     {loading ? (

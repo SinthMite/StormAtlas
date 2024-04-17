@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import Home from './Home.jsx';
@@ -18,6 +18,22 @@ function App() {
     setShowDropdown(!showDropdown);
   };
 
+  // Function to handle click outside dropdown
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowDropdown(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const dropdownRef = useRef(null);
+
   return (
     <Router>
       <div className='homePage'>
@@ -29,7 +45,7 @@ function App() {
             <div className='headerbutton'>
               <Link to="/StormAtlas"><button id='homeButton'>Home</button></Link>
               <button onClick={toggleDropdown}>Options</button>
-              {showDropdown && <DropDown />}
+              {showDropdown && <DropDown dropdownRef={dropdownRef} />}
               <Link to="/about"><button>About</button></Link>
             </div>
           </div>
@@ -51,17 +67,18 @@ function App() {
   );
 }
 
-function HomeWithMap() {
+function HomeWithMap({ setLat, setLon, lat, lon }) {
   return (
     <div>
-      <Home />
-      <HomeMap />
+      <Home setLat={setLat} setLon={setLon} lat ={lat} lon={lon}/>
+      <HomeMap lat={lat} lon={lon} />
     </div>
   );
 }
-function DropDown() {
+
+function DropDown({ dropdownRef }) {
   return (
-    <div className='dropDown'>
+    <div ref={dropdownRef} className='dropDown'>
       <ul className='dropDownList'>
         <li><Link className='linkItem' to="/hurricane">Hurricane</Link></li>
         <li><Link className='linkItem' to="/earthquake">Earthquake</Link></li>
@@ -72,4 +89,5 @@ function DropDown() {
     </div>
   );
 }
+
 export default App;

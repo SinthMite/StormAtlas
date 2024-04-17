@@ -8,7 +8,7 @@ import './HomeMap.css';
 export default function HomeMap({ lat, lon }) {
     const apiKey = "c02c81c69aeca3d86e9118215a9f3cca";
     const position = [lat || 51.505, lon || -0.09]; // Use lat and lon props if available, fallback to default values
-
+    console.log(lon)
     function PanToMarker() {
         const map = useMap();
         useEffect(() => {
