@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import Home from './Home.jsx';
-import Logo from './assets/Logo.svg';
 import Footer from './Footer.jsx';
 import HomeMap from './HomeMap.jsx';
 import HurricanePage from './HurricanePage.jsx';
@@ -13,15 +12,14 @@ import NewsCoveragePage from './NewsCoveragePage.jsx';
 import AboutPage from './AboutPage.jsx';
 
 function App() {
-  const [lat, setLat] = useState(null);
-  const [lon, setLon] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  // Manually specify the base URL (change '/myapp' to match your deployment)
-  const baseUrl = '/';
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
 
   return (
-    <Router basename={baseUrl}>
+    <Router>
       <div className='homePage'>
         <header>
           <div className='headerDiv'>
@@ -30,20 +28,21 @@ function App() {
             </div>
             <div className='headerbutton'>
               <Link to="/StormAtlas"><button id='homeButton'>Home</button></Link>
-              <button onClick={() => setShowDropdown(!showDropdown)}>Options</button>
+              <button onClick={toggleDropdown}>Options</button>
               {showDropdown && <DropDown />}
               <Link to="/about"><button>About</button></Link>
             </div>
           </div>
-          <div>
-          <h2 className='subHeader'>Amidst Troubling Times, Seek Refuge in the Sheltering Arms of StormAtlas</h2>
-          </div>
         </header>
         <div className='homeComponent'>
           <Routes>
-            <Route path="/StormAtlas" element={<HomeWithMap setLat={setLat} setLon={setLon} lat={lat} lon={lon} />} />
-
+            <Route path="/StormAtlas" element={<HomeWithMap />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/hurricane" element={<HurricanePage />} />
+            <Route path="/earthquake" element={<EarthquakePage />} />
+            <Route path="/flood" element={<FloodPage />} />
+            <Route path="/trend-analysis" element={<TrendAnalysisPage />} />
+            <Route path="/news-coverage" element={<NewsCoveragePage />} />
           </Routes>
         </div>
         <Footer />
@@ -52,11 +51,11 @@ function App() {
   );
 }
 
-function HomeWithMap({ setLat, setLon, lat, lon }) {
+function HomeWithMap() {
   return (
     <div>
-      <Home setLat={setLat} setLon={setLon} />
-      <HomeMap lat={lat} lon={lon} />
+      <Home />
+      <HomeMap />
     </div>
   );
 }

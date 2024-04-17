@@ -16,10 +16,10 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 4rem;
-  background-image: linear-gradient(45deg, hsl(207, 83%, 34%), hsl(0, 0%, 100%));
+  background-image: linear-gradient(45deg, #31E08D,#31BFE0);
   background-position: center;
   background-size: 100rem;
-  border-radius: 0rem 0rem 0rem 6rem;
+  border-radius: 0rem 0rem 1rem 1rem;
 }
 .headerDiv{
   display: flex;  
@@ -31,7 +31,7 @@ header {
   background-color: transparent;
 }
 #homeButton{
-  background-color: #b5e1ef;
+  background-color: #E06732;
 }
 #logo{
   width: 100px;
@@ -42,7 +42,7 @@ header {
 }
 
 h1{
-  color: rgb(238, 238, 238);
+  color: #ffffff;
 }
 
 footer{
@@ -61,7 +61,7 @@ footer{
   position: absolute;
   z-index: 1000;
   transform: translate(40%);
-  top: 10%;
+  top: 20%;
   padding: 20px;
-  background-color: rgb(255, 255, 255);
+  background-color: #465C61;
 }

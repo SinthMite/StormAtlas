@@ -8,7 +8,7 @@ h2{
 }
 
 .weatherContainer{
-    background: rgb(34, 91, 151);
+    background: linear-gradient(45deg, #31E08D,#31BFE0);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     color: #fff;
     display: flex;
@@ -18,7 +18,7 @@ h2{
 }
 
 .newsContainer{
-    background: rgb(34, 91, 151);
+    background: linear-gradient(45deg, #31E08D,#31BFE0);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     color: #fff;
     display: flex;
