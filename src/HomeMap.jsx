@@ -12,7 +12,7 @@ export default function HomeMap({ lat, lon }) {
     function PanToMarker() {
         const map = useMap();
         useEffect(() => {
-            map.flyTo(position, 8, {
+            map.flyTo(position, 3, {
                 duration: 2, // Duration of the animation in seconds
             });
         }, [map, position]);
@@ -26,7 +26,7 @@ export default function HomeMap({ lat, lon }) {
                 <PanToMarker />
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+                    url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
                 />
                 <TileLayer
                     url={`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${apiKey}`}

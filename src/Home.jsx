@@ -144,7 +144,7 @@ console.log(scienceNews.results)
                 <div className='newsContainer'>
                     <h2>Science News</h2>
                     {scienceNews.results && scienceNews.results.length > 0 ? (
-    <ul>
+    <ul className='newsUl'>
         {scienceNews.results
             .filter(article => article.image_url) // Filter out articles with no image
             .map((article, index) => (

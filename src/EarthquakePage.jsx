@@ -91,7 +91,7 @@ export default function EarthquakePage() {
                         <MapContainer center={position} zoom={5} scrollWheelZoom={true} style={{ height: "400px", width: "100%" }}>
                             <TileLayer
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+                                url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
                             />
                             {/* Display earthquake circle markers */}
                             {earthquakeDataHour.map((quake, index) => (
@@ -123,7 +123,7 @@ export default function EarthquakePage() {
                         <MapContainer center={position} zoom={5} scrollWheelZoom={true} style={{ height: "400px", width: "100%" }}>
                             <TileLayer
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+                                url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
                             />
                             {/* Display earthquake circle markers */}
                             {earthquakeDataDay.map((quake, index) => (
@@ -155,7 +155,7 @@ export default function EarthquakePage() {
                         <MapContainer center={position} zoom={5} scrollWheelZoom={true} style={{ height: "400px", width: "100%" }}>
                             <TileLayer
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+                                url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
                             />
                             {/* Display earthquake circle markers */}
                             {earthquakeDataWeek.map((quake, index) => (
