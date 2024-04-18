@@ -46,19 +46,19 @@ function App() {
               <Link to="/StormAtlas"><button id='homeButton'>Home</button></Link>
               <button onClick={toggleDropdown}>Options</button>
               {showDropdown && <DropDown dropdownRef={dropdownRef} />}
-              <Link to="/about"><button>About</button></Link>
+              <Link to="/StormAtlas/about"><button>About</button></Link>
             </div>
           </div>
         </header>
         <div className='homeComponent'>
           <Routes>
             <Route path="/StormAtlas" element={<HomeWithMap />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/hurricane" element={<HurricanePage />} />
-            <Route path="/earthquake" element={<EarthquakePage />} />
-            <Route path="/flood" element={<FloodPage />} />
-            <Route path="/trend-analysis" element={<TrendAnalysisPage />} />
-            <Route path="/news-coverage" element={<NewsCoveragePage />} />
+            <Route path="/StormAtlas/about" element={<AboutPage />} />
+            <Route path="/StormAtlas/hurricane" element={<HurricanePage />} />
+            <Route path="/StormAtlas/earthquake" element={<EarthquakePage />} />
+            <Route path="/StormAtlas/flood" element={<FloodPage />} />
+            <Route path="/StormAtlas/trend-analysis" element={<TrendAnalysisPage />} />
+            <Route path="/StormAtlas/news-coverage" element={<NewsCoveragePage />} />
           </Routes>
         </div>
         <Footer />
@@ -80,14 +80,13 @@ function DropDown({ dropdownRef }) {
   return (
     <div ref={dropdownRef} className='dropDown'>
       <ul className='dropDownList'>
-        <li><Link className='linkItem' to="/hurricane">Hurricane</Link></li>
-        <li><Link className='linkItem' to="/earthquake">Earthquake</Link></li>
-        <li><Link className='linkItem' to="/flood">Flood</Link></li>
-        <li><Link className='linkItem' to="/trend-analysis">Trend Analysis</Link></li>
-        <li><Link className='linkItem' to="/news-coverage">News Coverage</Link></li>
+        <li><Link className='linkItem' to="/StormAtlas/hurricane">Hurricane</Link></li>
+        <li><Link className='linkItem' to="/StormAtlas/earthquake">Earthquake</Link></li>
+        <li><Link className='linkItem' to="/StormAtlas/flood">Flood</Link></li>
+        <li><Link className='linkItem' to="/StormAtlas/trend-analysis">Trend Analysis</Link></li>
+        <li><Link className='linkItem' to="/StormAtlas/news-coverage">News Coverage</Link></li>
       </ul>
     </div>
   );
 }
-
 export default App;

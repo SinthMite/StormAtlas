@@ -9,14 +9,14 @@ export default function EarthquakePage() {
     const [earthquakeDataHour, setEarthquakeDataHour] = useState([]);
     const [earthquakeDataDay, setEarthquakeDataDay] = useState([]);
     const [earthquakeDataWeek, setEarthquakeDataWeek] = useState([]);
-    const [radius, setRadius] = useState(10); // Initial radius
+    const [radius, setRadius] = useState(0); // Initial radius
     const position = [51.505, -0.09]; // Default position
 
     useEffect(() => {
         // Function to update radius gradually
         const interval = setInterval(() => {
             // Increase radius up to a maximum value (e.g., 50)
-            setRadius(prevRadius => prevRadius < 50 ? prevRadius + 1 : 10);
+            setRadius(prevRadius => prevRadius < 50 ? prevRadius + 1 : 0);
         }, 20); // Update every 100 milliseconds
 
         return () => clearInterval(interval); // Cleanup function to clear interval
