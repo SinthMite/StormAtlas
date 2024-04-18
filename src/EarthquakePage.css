@@ -16,3 +16,18 @@
 .EarthPage h2{
     color: #465961;
 }
+.EarthquakeList {
+    max-height: 200px; /* Set the maximum height of the list */
+    overflow-y: auto; /* Enable vertical scrolling */
+    color: #465C61;
+  }
+.EarthquakeList li{
+    padding: 0.5rem;
+    border-bottom: 1px solid #465C61;
+  
+}
+
+.weeklyEarthQuakeSection{
+    color: #465C61;
+
+}

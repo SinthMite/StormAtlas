@@ -84,59 +84,103 @@ export default function EarthquakePage() {
             <div className='EarthheaderDiv'>
                 <h1>Earthquake Tracking</h1>
             </div>
-            <h2>Earthquakes within the last hour</h2>
-            <div className='EarthQuakeContainer'>
-                <MapContainer center={position} zoom={5} scrollWheelZoom={true} style={{ height: "400px", width: "100%" }}>
-                    <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
-                    />
-                    {/* Display earthquake circle markers */}
-                    {earthquakeDataHour.map((quake, index) => (
-                        <CircleMarker key={index} center={[quake.geometry.coordinates[1], quake.geometry.coordinates[0]]} radius={radius}>
-                            <Popup>
-                                Magnitude: {quake.properties.mag}<br />
-                                Location: {quake.properties.place}
-                            </Popup>
-                        </CircleMarker>
-                    ))}
-                </MapContainer>
-            </div>
-            <h2>Significant Earthquakes within the day</h2>
-            <div className='EarthQuakeContainer'>
-                <MapContainer center={position} zoom={5} scrollWheelZoom={true} style={{ height: "400px", width: "100%" }}>
-                    <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
-                    />
-                    {/* Display earthquake circle markers */}
-                    {earthquakeDataDay.map((quake, index) => (
-                        <CircleMarker key={index} center={[quake.geometry.coordinates[1], quake.geometry.coordinates[0]]} radius={radius}>
-                            <Popup>
-                                Magnitude: {quake.properties.mag}<br />
-                                Location: {quake.properties.place}
-                            </Popup>
-                        </CircleMarker>
-                    ))}
-                </MapContainer>
-            </div>
-            <h2>Significant Earthquakes within the last week</h2>
-            <div className='EarthQuakeContainer'>
-                <MapContainer center={position} zoom={5} scrollWheelZoom={true} style={{ height: "400px", width: "100%" }}>
-                    <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
-                    />
-                    {/* Display earthquake circle markers */}
-                    {earthquakeDataWeek.map((quake, index) => (
-                        <CircleMarker key={index} center={[quake.geometry.coordinates[1], quake.geometry.coordinates[0]]} radius={radius}>
-                            <Popup>
-                                Magnitude: {quake.properties.mag}<br />
-                                Location: {quake.properties.place}
-                            </Popup>
-                        </CircleMarker>
-                    ))}
-                </MapContainer>
+            <div className='EarthpageDiv'>
+                <section>
+                    <h2>Earthquakes within the last hour</h2>
+                    <div className='EarthQuakeContainer'>
+                        <MapContainer center={position} zoom={5} scrollWheelZoom={true} style={{ height: "400px", width: "100%" }}>
+                            <TileLayer
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+                            />
+                            {/* Display earthquake circle markers */}
+                            {earthquakeDataHour.map((quake, index) => (
+                                <CircleMarker key={index} center={[quake.geometry.coordinates[1], quake.geometry.coordinates[0]]} radius={radius}>
+                                    <Popup>
+                                        Magnitude: {quake.properties.mag}<br />
+                                        Location: {quake.properties.place}
+                                    </Popup>
+                                </CircleMarker>
+                            ))}
+                        </MapContainer>
+                    </div>
+                    {earthquakeDataHour && earthquakeDataHour.length <= 0 ? (
+                        <p>No Significant earthquakes within the last hour</p>
+                    ) : (
+                        <ul className="EarthquakeList">
+                            {earthquakeDataHour.map((quake, index) => (
+                                <li key={index}>
+                                    <h3>{quake.properties.title}</h3>
+                                    <p>{quake.properties.place}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </section>
+                <section>
+                    <h2>Significant Earthquakes within the day</h2>
+                    <div className='EarthQuakeContainer'>
+                        <MapContainer center={position} zoom={5} scrollWheelZoom={true} style={{ height: "400px", width: "100%" }}>
+                            <TileLayer
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+                            />
+                            {/* Display earthquake circle markers */}
+                            {earthquakeDataDay.map((quake, index) => (
+                                <CircleMarker key={index} center={[quake.geometry.coordinates[1], quake.geometry.coordinates[0]]} radius={radius}>
+                                    <Popup>
+                                        Magnitude: {quake.properties.mag}<br />
+                                        Location: {quake.properties.place}
+                                    </Popup>
+                                </CircleMarker>
+                            ))}
+                        </MapContainer>
+                    </div>
+                    {earthquakeDataDay && earthquakeDataDay.length <= 0 ? (
+                        <p>No Significant earthquakes within the last hour</p>
+                    ) : (
+                        <ul className="EarthquakeList">
+                            {earthquakeDataDay.map((quake, index) => (
+                                <li key={index}>
+                                    <h3>{quake.properties.title}</h3>
+                                    <p>{quake.properties.place}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </section>
+                <section className='weeklyEarthQuakeSection'>
+                    <h2>Significant Earthquakes within the last week</h2>
+                    <div className='EarthQuakeContainer'>
+                        <MapContainer center={position} zoom={5} scrollWheelZoom={true} style={{ height: "400px", width: "100%" }}>
+                            <TileLayer
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+                            />
+                            {/* Display earthquake circle markers */}
+                            {earthquakeDataWeek.map((quake, index) => (
+                                <CircleMarker key={index} center={[quake.geometry.coordinates[1], quake.geometry.coordinates[0]]} radius={radius}>
+                                    <Popup>
+                                        Magnitude: {quake.properties.mag}<br />
+                                        Location: {quake.properties.place}
+                                    </Popup>
+                                </CircleMarker>
+                            ))}
+                        </MapContainer>
+                    </div>
+                    {earthquakeDataWeek && earthquakeDataWeek.length <= 0 ? (
+                        <p>No Significant earthquakes within the last hour</p>
+                    ) : (
+                        <ul className="EarthquakeList">
+                            {earthquakeDataWeek.map((quake, index) => (
+                                <li key={index}>
+                                    <h3>{quake.properties.title}</h3>
+                                    <p>{quake.properties.place}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </section>
             </div>
         </div>
     );
