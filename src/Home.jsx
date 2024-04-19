@@ -11,7 +11,7 @@ const Home = ({ setLat, setLon }) => {
     const [temperature, setTemperature] = useState('');
     const [description, setDescription] = useState('');
     const [humidity, setHumidity] = useState('');
-    const [zipCode, setZipCode] = useState('');
+    const [zipCode, setZipCode] = useState('07052');
     const [loading, setLoading] = useState(false);
     const [scienceNews, setScienceNews] = useState([]);
     const [error, setError] = useState('');
@@ -47,23 +47,27 @@ const Home = ({ setLat, setLon }) => {
 
     useEffect(() => {
         const fetchNews = async () => {
-            try {
-                const response = await fetch(`https://newsdata.io/api/1/news?apikey=${API_KEY_NEWSAPI}&language=en&category=education,environment,health,science,technology`);
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log("News Data:", data); // Log the data
-                    setScienceNews(data); // Update state with news data
-                } else {
-                    throw new Error('Error fetching news data');
-                }
-            } catch (error) {
-                console.error('Error fetching news data:', error); // Log detailed error
-                setError('Error fetching news data. Please try again later.');
+            const apiKey = 'AIzaSyCKSPy_djrq8jIcAWBLnKq2L4X-rs_dylU';
+const searchEngineId = 'f362cbcad97df4478';
+const searchTerm = `weather ${zipCode}`; // Combining zipCode with hardcoded weather term
+        try {
+            const response = await fetch(`https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${encodeURIComponent(searchTerm)}`);
+            if (response.ok) {
+                const data = await response.json();
+                console.log("News Data:", data); // Log the data
+                setScienceNews(data.items || []); // Update state with news items
+            } else {
+                throw new Error('Error fetching news data');
             }
-        };
-    
-        fetchNews();
-    }, []);
+        } catch (error) {
+            console.error('Error fetching news data:', error); // Log detailed error
+            setError('Error fetching news data. Please try again later.');
+        }
+    };
+
+    fetchNews(); // Call the fetchNews function when the component mounts or when zipCode changes
+}, [zipCode]); // Trigger fetchNews whenever zipCode changes
+
     useEffect(() => {
         if (videoRef.current) {
             videoRef.current.play().catch(error => console.error('Error playing video:', error));
@@ -145,23 +149,18 @@ console.log(scienceNews.results)
 
                 <div className='newsContainer'>
                     <h2>Science News</h2>
-                    {scienceNews.results && scienceNews.results.length > 0 ? (
     <ul className='newsUl'>
-        {scienceNews.results
-            .filter(article => article.image_url) // Filter out articles with no image
-            .map((article, index) => (
-                <li key={index}>
-                    <a href={article.link} target="_blank" rel="noopener noreferrer">
-                        <img src={article.image_url} alt={article.title} />
-                        <h2>{article.title}</h2>
-                        <p>{article.creator ? article.creator : 'No Author'}</p>
-                    </a>
-                </li>
-            ))}
+        {scienceNews.map((item, index) => (
+            <li key={index}>
+                <a href={item.link} target="_blank" rel="noopener noreferrer">
+                    <img src={item.pagemap.cse_image && item.pagemap.cse_image.length > 0 ? item.pagemap.cse_image[0].src : 'IMAGE_URL_FALLBACK'} alt={item.title} />
+                    <h2>{item.title}</h2>
+                    <p>{item.pagemap.metatags && item.pagemap.metatags.length > 0 && item.pagemap.metatags[0].author ? item.pagemap.metatags[0].author : 'No Author'}</p>
+                </a>
+            </li>
+        ))}
     </ul>
-) : (
-    <p>No science news available</p>
-)}
+
                 </div>
                 <div className='weatherContainer'>
                     <form onSubmit={handleSubmit}>
