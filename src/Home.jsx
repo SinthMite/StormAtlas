@@ -98,13 +98,15 @@ const Home = ({ setLat, setLon }) => {
     const handleChange = (event) => {
         setZipCode(event.target.value);
     };
-
     const fetchGeo = async () => {
         try {
             const urlGeo = `https://api.openweathermap.org/geo/1.0/zip?zip=${encodeURIComponent(zipCode)},US&appid=${API_KEY_OPENWEATHERMAP}`;
             const response = await fetch(urlGeo);
             if (response.ok) {
-                return await response.json();
+                const data = await response.json();
+                setLatitude(data.lat); // Set latitude
+                setLongitude(data.lon); // Set longitude
+                return data; // Return the data
             } else {
                 throw new Error('Error fetching geo location');
             }

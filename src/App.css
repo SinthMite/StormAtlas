@@ -30,8 +30,8 @@ header {
   color: hsla(0, 0%, 100%);
   background-color: transparent;
 }
-#homeButton{
-  background-color: #E06732;
+#OptionButton{
+  background-color: #ef5f22;
 }
 #logo{
   width: 100px;

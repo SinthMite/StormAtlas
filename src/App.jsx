@@ -43,8 +43,8 @@ function App() {
               <h1>StormAtlas</h1>
             </div>
             <div className='headerbutton'>
-              <Link to="/StormAtlas"><button id='homeButton'>Home</button></Link>
-              <button onClick={toggleDropdown}>Options</button>
+              <Link to="/StormAtlas"><button >Home</button></Link>
+              <button onClick={toggleDropdown} id='OptionButton'>Options</button>
               {showDropdown && <DropDown dropdownRef={dropdownRef} />}
               <Link to="/StormAtlas/about"><button>About</button></Link>
             </div>
@@ -68,14 +68,14 @@ function App() {
 }
 
 function HomeWithMap({ setLat, setLon, lat, lon }) {
+  console.log(lat)
   return (
     <div>
-      <Home setLat={setLat} setLon={setLon} lat ={lat} lon={lon}/>
+      <Home setLat={setLat} setLon={setLon} />
       <HomeMap lat={lat} lon={lon} />
     </div>
   );
 }
-
 function DropDown({ dropdownRef }) {
   return (
     <div ref={dropdownRef} className='dropDown'>
