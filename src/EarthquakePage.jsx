@@ -16,7 +16,7 @@ const EarthquakePage = () => {
 
     useEffect(() => {
         fetchEarthquakeData('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson', setEarthquakeDataHour, setMapCenterHour);
-        fetchEarthquakeData('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_day.geojson', setEarthquakeDataDay, setMapCenterDay);
+        fetchEarthquakeData('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson', setEarthquakeDataDay, setMapCenterDay);
         fetchEarthquakeData('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson', setEarthquakeDataWeek, setMapCenterWeek);
     }, []);
 
@@ -125,7 +125,7 @@ const EarthquakePage = () => {
                     </div>
                 </section>
                 <section>
-                    <h2>Significant Earthquakes within the last day</h2>
+                    <h2>Earthquakes within the last day</h2>
                     <div className='EarthQuakeContainer'>
                         <MapContainer center={mapCenterDay} zoom={5} scrollWheelZoom={true} style={{ height: "400px", width: "100%" }}>
                             <PanToMarkerDay />
