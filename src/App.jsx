@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
-import Home from './Home.jsx';
+import Home from './Home.jsx'; // Import the combined Home component
 import Footer from './Footer.jsx';
-import HomeMap from './HomeMap.jsx';
 import HurricanePage from './HurricanePage.jsx';
 import EarthquakePage from './EarthquakePage.jsx';
 import FloodPage from './FloodPage.jsx';
@@ -52,7 +51,7 @@ function App() {
         </header>
         <div className='homeComponent'>
           <Routes>
-            <Route path="/StormAtlas" element={<HomeWithMap />} />
+            <Route path="/StormAtlas" element={<Home />} /> {/* Use the combined Home component */}
             <Route path="/StormAtlas/about" element={<AboutPage />} />
             <Route path="/StormAtlas/hurricane" element={<HurricanePage />} />
             <Route path="/StormAtlas/earthquake" element={<EarthquakePage />} />
@@ -67,15 +66,6 @@ function App() {
   );
 }
 
-function HomeWithMap({ setLat, setLon, lat, lon }) {
-  console.log(lat)
-  return (
-    <div>
-      <Home setLat={setLat} setLon={setLon} />
-      <HomeMap lat={lat} lon={lon} />
-    </div>
-  );
-}
 function DropDown({ dropdownRef }) {
   return (
     <div ref={dropdownRef} className='dropDown'>
@@ -89,4 +79,5 @@ function DropDown({ dropdownRef }) {
     </div>
   );
 }
+
 export default App;

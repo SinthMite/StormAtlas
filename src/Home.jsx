@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import BackGroundVideo from './assets/BackGround.mp4';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
+import "leaflet-defaulticon-compatibility";
 import './Home.css';
 
 const API_KEY_OPENWEATHERMAP = "c02c81c69aeca3d86e9118215a9f3cca";
 const API_KEY_NEWSAPI = "pub_4209530ee2e4b7b0baaf460bdb8c7b4869283";
 
-const Home = ({ setLat, setLon }) => {
+const Home = () => {
     const videoRef = useRef(null);
     const [cityName, setCityName] = useState('');
     const [temperature, setTemperature] = useState('');
@@ -17,10 +20,11 @@ const Home = ({ setLat, setLon }) => {
     const [error, setError] = useState('');
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
-    console.log(longitude)
+    const [submitted, setSubmitted] = useState(false); // State to track form submission
+
     useEffect(() => {
         const fetchData = async () => {
-            if (zipCode.trim() === '') return; // Skip fetching if zipCode is empty
+            if (!submitted || zipCode.trim() === '') return; // Only fetch data when submitted and zipCode is not empty
             setLoading(true);
             try {
                 const geoResponse = await fetchGeo();
@@ -31,8 +35,8 @@ const Home = ({ setLat, setLon }) => {
                         setTemperature(weatherData.temperature);
                         setDescription(weatherData.description.toUpperCase());
                         setHumidity(weatherData.humidity);
-                        setLat(geoResponse.lat);
-                        setLon(geoResponse.lon);
+                        setLatitude(geoResponse.lat);
+                        setLongitude(geoResponse.lon);
                     }
                 }
             } catch (error) {
@@ -43,30 +47,29 @@ const Home = ({ setLat, setLon }) => {
         };
 
         fetchData();
-    }, [zipCode, setLat, setLon]);
+    }, [submitted, zipCode]);
 
     useEffect(() => {
         const fetchNews = async () => {
             const apiKey = 'AIzaSyCKSPy_djrq8jIcAWBLnKq2L4X-rs_dylU';
-const searchEngineId = 'f362cbcad97df4478';
-const searchTerm = `weather ${zipCode}`; // Combining zipCode with hardcoded weather term
-        try {
-            const response = await fetch(`https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${encodeURIComponent(searchTerm)}`);
-            if (response.ok) {
-                const data = await response.json();
-                console.log("News Data:", data); // Log the data
-                setScienceNews(data.items || []); // Update state with news items
-            } else {
-                throw new Error('Error fetching news data');
+            const searchEngineId = 'f362cbcad97df4478';
+            const searchTerm = `weather ${zipCode}`;
+            try {
+                const response = await fetch(`https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${encodeURIComponent(searchTerm)}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setScienceNews(data.items || []);
+                } else {
+                    throw new Error('Error fetching news data');
+                }
+            } catch (error) {
+                console.error('Error fetching news data:', error);
+                setError('Error fetching news data. Please try again later.');
             }
-        } catch (error) {
-            console.error('Error fetching news data:', error); // Log detailed error
-            setError('Error fetching news data. Please try again later.');
-        }
-    };
+        };
 
-    fetchNews(); // Call the fetchNews function when the component mounts or when zipCode changes
-}, [zipCode]); // Trigger fetchNews whenever zipCode changes
+        fetchNews();
+    }, [submitted, zipCode]);
 
     useEffect(() => {
         if (videoRef.current) {
@@ -74,33 +77,16 @@ const searchTerm = `weather ${zipCode}`; // Combining zipCode with hardcoded wea
         }
     }, []);
 
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setError('');
-        try {
-            setLoading(true);
-            const geoResponse = await fetchGeo();
-            if (geoResponse) {
-                const weatherData = await fetchWeather(geoResponse.lat, geoResponse.lon);
-                if (weatherData) {
-                    setCityName(weatherData.cityName);
-                    setTemperature(weatherData.temperature);
-                    setDescription(weatherData.description.toUpperCase());
-                    setHumidity(weatherData.humidity);
-                    setLat(geoResponse.lat);
-                    setLon(geoResponse.lon);
-                }
-            }
-        } catch (error) {
-            setError('Error fetching weather data. Please enter a valid ZIP code.');
-        } finally {
-            setLoading(false);
-        }
+        setSubmitted(true); // Set submitted to true when the form is submitted
     };
-
+    
     const handleChange = (event) => {
-        setZipCode(event.target.value);
+        // Update zipCode state only when typing if the form is not loading
+        if (!loading) {
+            setZipCode(event.target.value);
+        }
     };
     const fetchGeo = async () => {
         try {
@@ -108,9 +94,7 @@ const searchTerm = `weather ${zipCode}`; // Combining zipCode with hardcoded wea
             const response = await fetch(urlGeo);
             if (response.ok) {
                 const data = await response.json();
-                setLatitude(data.lat); // Set latitude
-                setLongitude(data.lon); // Set longitude
-                return data; // Return the data
+                return data;
             } else {
                 throw new Error('Error fetching geo location');
             }
@@ -140,37 +124,33 @@ const searchTerm = `weather ${zipCode}`; // Combining zipCode with hardcoded wea
             throw error;
         }
     };
-console.log(scienceNews.results)
+
     return (
         <div className='mainDiv'>
-
-
             <section className='basicInfo'>
-
                 <div className='newsContainer'>
                     <h2>Science News</h2>
-    <ul className='newsUl'>
-        {scienceNews.map((item, index) => (
-            <li key={index}>
-                <a href={item.link} target="_blank" rel="noopener noreferrer">
-                    <img src={item.pagemap.cse_image && item.pagemap.cse_image.length > 0 ? item.pagemap.cse_image[0].src : 'IMAGE_URL_FALLBACK'} alt={item.title} />
-                    <h2>{item.title}</h2>
-                    <p>{item.pagemap.metatags && item.pagemap.metatags.length > 0 && item.pagemap.metatags[0].author ? item.pagemap.metatags[0].author : 'No Author'}</p>
-                </a>
-            </li>
-        ))}
-    </ul>
-
+                    <ul className='newsUl'>
+                        {scienceNews.map((item, index) => (
+                            <li key={index}>
+                                <a href={item.link} target="_blank" rel="noopener noreferrer">
+                                    <img src={item.pagemap.cse_image && item.pagemap.cse_image.length > 0 ? item.pagemap.cse_image[0].src : 'IMAGE_URL_FALLBACK'} alt={item.title} />
+                                    <h2>{item.title}</h2>
+                                    <p>{item.pagemap.metatags && item.pagemap.metatags.length > 0 && item.pagemap.metatags[0].author ? item.pagemap.metatags[0].author : 'No Author'}</p>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
                 <div className='weatherContainer'>
                     <form onSubmit={handleSubmit}>
-                        <input
-                            type="text"
-                            value={zipCode}
-                            onChange={handleChange}
-                            placeholder="Enter ZIP code"
-                            id='homeWeather'
-                        />
+                    <input
+                    type="text"
+                    value={zipCode}
+                    onChange={handleChange}
+                    placeholder="Enter ZIP code"
+                    id='homeWeather'
+                />
                         <button type="submit" disabled={loading}>
                             {loading? 'Loading...' : 'Submit'}
                         </button>
@@ -187,10 +167,50 @@ console.log(scienceNews.results)
                             <p>Humidity: {humidity}</p>
                         </div>
                     )}
+                    <MapComponent latitude={latitude} longitude={longitude} />
                 </div>
             </section>
         </div>
     );
-}
+};
+
+const MapComponent = ({ latitude, longitude }) => {
+    const apiKey = "c02c81c69aeca3d86e9118215a9f3cca";
+    const position = [latitude || 51.05, longitude || -0.09]; // Use lat and lon props if available, fallback to default values
+
+    function PanToMarker() {
+        const map = useMap();
+        useEffect(() => {
+            map.flyTo(position, 3, {
+                duration: 2, // Duration of the animation in seconds
+            });
+        }, [map, position]);
+
+        return null;
+    }
+    return (
+        <div className='MapContainer'>     
+            <MapContainer center={position} zoom={-100} scrollWheelZoom={true} style={{ height: "400px", width: "100%" }}>
+                <PanToMarker />
+                <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url='https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
+                />
+                <TileLayer
+                    url={`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${apiKey}`}
+                />
+                                
+                <TileLayer
+                    url={`https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=${apiKey}`}
+                />
+                <Marker position={position}>
+                    <Popup>
+                        A pretty CSS3 popup. <br /> Easily customizable.
+                    </Popup>
+                </Marker>
+            </MapContainer>
+        </div>
+    );
+};
 
 export default Home;
