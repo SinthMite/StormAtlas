@@ -1,5 +1,8 @@
 .EarthPage h1, .EarthPage h2{
-    color: rgb(141, 141, 141);
+    color: rgb(0, 0, 0);
+    font-weight: 800;
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
 .EarthQuakeContainer {
