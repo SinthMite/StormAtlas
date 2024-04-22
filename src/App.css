@@ -1,7 +1,7 @@
 #root {
   max-width: 1280px;
   display: flex;
-  justify-content: center;
+  justify-content:center;
   align-items: center;
 }
 *{
@@ -47,11 +47,10 @@ footer{
 
 }
 .homePage {
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 100%;
 }
 
 .dropDown {
@@ -71,4 +70,7 @@ ul{
 .linkItem {
   color: rgb(255, 255, 255); /* Change 'blue' to whatever color you desire */
   text-decoration: none; /* Remove underline from links */
+}
+.weatherContainer{
+  transform: translate(10%);
 }
