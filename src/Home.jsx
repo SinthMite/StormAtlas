@@ -168,7 +168,6 @@ const Home = () => {
                         <>
                             <div>
                                 <h2>Weather Information</h2>
-                                <p>City: {cityName}</p>
                                 <p>Temperature: {temperature}</p>
                                 <p>Description: {description}</p>
                                 <p>Humidity: {humidity}</p>
