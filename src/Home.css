@@ -18,7 +18,7 @@ h2{
 }
 
 .weatherContainer{
-    background: linear-gradient(45deg, #31E08D,#31BFE0);
+  background-image: linear-gradient(45deg, #4a4a4a,#421024);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     color: #fff;
     display: flex;
@@ -28,8 +28,8 @@ h2{
 }
 
 .newsContainer{
-    background: linear-gradient(45deg, #31E08D,#31BFE0);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(45deg, #4a4a4a,#421024);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -164,10 +164,10 @@ h2{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(45deg, #31BFE0,#31E08D);
+    background: linear-gradient(45deg, #421024,#4a4a4a);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
     padding: 1rem;
     font-size: 1.5em;
     font-weight: 900;
 
-  }
+  }  
