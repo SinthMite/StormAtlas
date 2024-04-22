@@ -33,7 +33,7 @@ header {
   background-color: transparent;
 }
 #OptionButton{
-  background-color: #ef5f22;
+  background-color: #623a29;
 }
 .title{
   color: white;
@@ -61,7 +61,7 @@ footer{
   transform: translateX(-50%);
   z-index: 9999; /* Ensure a lower z-index value compared to the header */
   padding: 20px;
-  background-color: #465C61;
+  background-color: #392d1a;
   font-size: 4rem;
   color: white;
 }
