@@ -12,7 +12,7 @@ const EarthquakePage = () => {
     const [mapCenterHour, setMapCenterHour] = useState([51.505, 50]); // Default position for hour
     const [mapCenterDay, setMapCenterDay] = useState([51.505, 50]); // Default position for day
     const [mapCenterWeek, setMapCenterWeek] = useState([51.505, 50]); // Default position for week
-    const [radius, setRadius] = useState(0); // Initial radius
+    
 
     useEffect(() => {
         fetchEarthquakeData('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson', setEarthquakeDataHour, setMapCenterHour);
@@ -72,7 +72,7 @@ const EarthquakePage = () => {
     function PanToMarkerDay() {
         const map = useMap();
         useEffect(() => {
-            map.flyTo(mapCenterDay, 1, {
+            map.flyTo(mapCenterDay, 3, {
                 duration: 2, // Duration of the animation in seconds
             });
         }, [map, mapCenterDay]);
@@ -84,7 +84,7 @@ const EarthquakePage = () => {
         const map = useMap();
         useEffect(() => {
             map.flyTo(mapCenterWeek, 3, {
-                duration: 1, // Duration of the animation in seconds
+                duration: 2, // Duration of the animation in seconds
             });
         }, [map, mapCenterWeek]);
 
@@ -93,9 +93,9 @@ const EarthquakePage = () => {
     useEffect(() => {
         // Function to update radius gradually
         const interval = setInterval(() => {
-            // Increase radius up to a maximum value (e.g., 20)
-            setRadius(prevRadius => prevRadius < 20 ? prevRadius + 1 : 0);
-        }, 40); // Update every 40 milliseconds
+            // Increase radius up to a maximum value (e.g., 50)
+            setRadius(prevRadius => prevRadius < 50 ? prevRadius + 1 : 10);
+        }, 100); // Update every 100 milliseconds
 
         return () => clearInterval(interval); // Cleanup function to clear interval
     }, []); // Run only once on component mount
@@ -119,7 +119,7 @@ const EarthquakePage = () => {
                             {mapCenterHour && (
                                 <CircleMarker
                                     center={mapCenterHour}
-                                    radius={radius}
+                                    radius={5}
                                     fillColor="red"
                                     fillOpacity={0.5}
                                     color="red"
@@ -146,7 +146,7 @@ const EarthquakePage = () => {
                             {mapCenterDay && (
                                 <CircleMarker
                                     center={mapCenterDay}
-                                    radius={radius}
+                                    radius={5}
                                     fillColor="red"
                                     fillOpacity={0.5}
                                     color="red"
@@ -173,7 +173,7 @@ const EarthquakePage = () => {
                             {mapCenterWeek && (
                                 <CircleMarker
                                     center={mapCenterWeek}
-                                    radius={radius}
+                                    radius={5}
                                     fillColor="red"
                                     fillOpacity={0.5}
                                     color="red"
