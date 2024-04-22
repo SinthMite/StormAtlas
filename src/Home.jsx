@@ -51,23 +51,27 @@ const Home = () => {
 
     useEffect(() => {
         const fetchNews = async () => {
-            const apiKey = 'AIzaSyCKSPy_djrq8jIcAWBLnKq2L4X-rs_dylU';
-            const searchEngineId = 'f362cbcad97df4478';
+            const apiKey = 'Your_API_Key';
+            const searchEngineId = 'Your_Search_Engine_ID';
             const searchTerm = `weather ${zipCode}`;
-            try {
-                const response = await fetch(`https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${encodeURIComponent(searchTerm)}`);
-                if (response.ok) {
-                    const data = await response.json();
-                    setScienceNews(data.items || []);
-                } else {
-                    throw new Error('Error fetching news data');
+            
+            // Check if zipCode is a valid 5-digit value
+            if (zipCode.length === 5 && /^\d+$/.test(zipCode)) {
+                try {
+                    const response = await fetch(`https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${encodeURIComponent(searchTerm)}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        setScienceNews(data.items || []);
+                    } else {
+                        throw new Error('Error fetching news data');
+                    }
+                } catch (error) {
+                    console.error('Error fetching news data:', error);
+                    setError('Error fetching news data. Please try again later.');
                 }
-            } catch (error) {
-                console.error('Error fetching news data:', error);
-                setError('Error fetching news data. Please try again later.');
             }
         };
-
+    
         fetchNews();
     }, [submitted, zipCode]);
 
