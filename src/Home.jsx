@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import "leaflet-defaulticon-compatibility";
 import './Home.css';
-
+import altimage from './assets/alt.jpg'
 const API_KEY_OPENWEATHERMAP = "c02c81c69aeca3d86e9118215a9f3cca";
 const API_KEY_NEWSAPI = "pub_4209530ee2e4b7b0baaf460bdb8c7b4869283";
 
@@ -20,11 +20,10 @@ const Home = () => {
     const [error, setError] = useState('');
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
-    const [submitted, setSubmitted] = useState(false); // State to track form submission
 
     useEffect(() => {
         const fetchData = async () => {
-            if (!submitted || zipCode.trim() === '') return; // Only fetch data when submitted and zipCode is not empty
+            if ( zipCode.trim() === '') return; // Only fetch data when submitted and zipCode is not empty
             setLoading(true);
             try {
                 const geoResponse = await fetchGeo();
@@ -47,13 +46,14 @@ const Home = () => {
         };
 
         fetchData();
-    }, [submitted, zipCode]);
+    }, [ zipCode]);
 
     useEffect(() => {
         const fetchNews = async () => {
-            const apiKey = 'Your_API_Key';
-            const searchEngineId = 'Your_Search_Engine_ID';
-            const searchTerm = `weather ${zipCode}`;
+            const apiKey = 'AIzaSyCKSPy_djrq8jIcAWBLnKq2L4X-rs_dylU';
+            const searchEngineId = 'f362cbcad97df4478';
+            const weatherCondition = `hurricane ${zipCode} OR tornado ${zipCode} OR earthquake ${zipCode} OR flood ${zipCode} OR wildfire ${zipCode} OR tsunami ${zipCode} OR avalanche ${zipCode} OR blizzard ${zipCode} OR drought ${zipCode} OR heatwave ${zipCode} OR cyclone ${zipCode} OR landslide ${zipCode} OR volcano eruption ${zipCode} OR weather forecast ${zipCode} OR weather news ${zipCode} OR climate change ${zipCode} OR meteorology ${zipCode} OR weather patterns ${zipCode} OR atmospheric conditions ${zipCode} OR extreme weather events ${zipCode} OR weather alerts ${zipCode} OR severe weather ${zipCode}`;
+            const searchTerm = `${weatherCondition} ${zipCode}`;
             
             // Check if zipCode is a valid 5-digit value
             if (zipCode.length === 5 && /^\d+$/.test(zipCode)) {
@@ -73,7 +73,7 @@ const Home = () => {
         };
     
         fetchNews();
-    }, [submitted, zipCode]);
+    }, [ zipCode]);
 
     useEffect(() => {
         if (videoRef.current) {
@@ -83,7 +83,6 @@ const Home = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setSubmitted(true); // Set submitted to true when the form is submitted
     };
     
     const handleChange = (event) => {
@@ -133,14 +132,13 @@ const Home = () => {
         <div className='mainDiv'>
             <section className='basicInfo'>
                 <div className='newsContainer'>
-                    <h2>Science News</h2>
+                    <h2>Weather News</h2>
                     <ul className='newsUl'>
                         {scienceNews.map((item, index) => (
                             <li key={index}>
                                 <a href={item.link} target="_blank" rel="noopener noreferrer">
-                                    <img src={item.pagemap.cse_image && item.pagemap.cse_image.length > 0 ? item.pagemap.cse_image[0].src : 'IMAGE_URL_FALLBACK'} alt={item.title} />
+                                <img src={item.pagemap.cse_image && item.pagemap.cse_image.length > 0 ? item.pagemap.cse_image[0].src : altimage} alt={altimage} />
                                     <h2>{item.title}</h2>
-                                    <p>{item.pagemap.metatags && item.pagemap.metatags.length > 0 && item.pagemap.metatags[0].author ? item.pagemap.metatags[0].author : 'No Author'}</p>
                                 </a>
                             </li>
                         ))}

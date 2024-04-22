@@ -61,7 +61,7 @@ footer{
   transform: translateX(-50%);
   z-index: 9999; /* Ensure a lower z-index value compared to the header */
   padding: 20px;
-  background-color: #392d1a;
+  background-color: hsla(37, 37%, 16%,0.8);
   font-size: 4rem;
   color: white;
 }

@@ -37,6 +37,7 @@ h2{
     color: rgb(86, 86, 120);
     padding-left: 1rem;
     margin: 2rem 0rem;
+    border-radius: 1rem;
 }
   
 
@@ -106,7 +107,38 @@ h2{
     color: #fff;
  
   }
-  .newsUl a{
+  .newsUl {
+    /* Hide default scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  
+    /* Custom scrollbar style */
+    overflow-y: auto; /* Enable vertical scrollbar */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgba(255, 255, 255, 0.7) rgba(0, 0, 0, 0.3); /* Firefox */
+  }
+  
+  .newsUl::-webkit-scrollbar {
+    /* Hide default scrollbar for Chrome, Safari, and Opera */
+    display: none;
+  }
+  
+  .newsUl::-webkit-scrollbar-thumb {
+    /* Custom thumb color */
+    background-color: rgba(0, 0, 0, 0.3); /* Change color as needed */
+  }
+  
+  .newsUl::-webkit-scrollbar-thumb:hover {
+    /* Custom hover effect for thumb */
+    background-color: rgba(0, 0, 0, 0.5); /* Change color as needed */
+  }
+  
+  .newsUl::-webkit-scrollbar-track {
+    /* Custom track color */
+    background-color: rgba(255, 255, 255, 0.7); /* Change color as needed */
+  }
+  
+  .newsUl img{
     text-decoration: none;
     color: rgb(255, 255, 255);
     font-size: 16px;
@@ -126,3 +158,4 @@ h2{
     font-size: 16px;
     color: #ffffff;
   }
+
