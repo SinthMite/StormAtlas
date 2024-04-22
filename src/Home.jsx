@@ -14,13 +14,13 @@ const Home = () => {
     const [temperature, setTemperature] = useState('');
     const [description, setDescription] = useState('');
     const [humidity, setHumidity] = useState('');
-    const [zipCode, setZipCode] = useState('07052');
+    const [zipCode, setZipCode] = useState('10036');
     const [loading, setLoading] = useState(false);
     const [scienceNews, setScienceNews] = useState([]);
     const [error, setError] = useState('');
     const [latitude, setLatitude] = useState(null);
-    const [longitude, setLongitude] = useState(null);
-
+    const [longitude, setLongitude] = useState(null)
+    const [state, setState] = useState('')
     useEffect(() => {
         const fetchData = async () => {
             if ( zipCode.trim() === '') return; // Only fetch data when submitted and zipCode is not empty
@@ -53,7 +53,9 @@ const Home = () => {
             const apiKey = 'AIzaSyCKSPy_djrq8jIcAWBLnKq2L4X-rs_dylU';
             const searchEngineId = 'f362cbcad97df4478';
             const weatherCondition = `hurricane ${zipCode} OR tornado ${zipCode} OR earthquake ${zipCode} OR flood ${zipCode} OR wildfire ${zipCode} OR tsunami ${zipCode} OR avalanche ${zipCode} OR blizzard ${zipCode} OR drought ${zipCode} OR heatwave ${zipCode} OR cyclone ${zipCode} OR landslide ${zipCode} OR volcano eruption ${zipCode} OR weather forecast ${zipCode} OR weather news ${zipCode} OR climate change ${zipCode} OR meteorology ${zipCode} OR weather patterns ${zipCode} OR atmospheric conditions ${zipCode} OR extreme weather events ${zipCode} OR weather alerts ${zipCode} OR severe weather ${zipCode}`;
-            const searchTerm = `${weatherCondition} ${zipCode}`;
+            const searchTerm = `${weatherCondition} ${zipCode} -filetype:htm`;
+            
+            ;
             
             // Check if zipCode is a valid 5-digit value
             if (zipCode.length === 5 && /^\d+$/.test(zipCode)) {
@@ -97,6 +99,8 @@ const Home = () => {
             const response = await fetch(urlGeo);
             if (response.ok) {
                 const data = await response.json();
+                console.log(data)
+                setState(data.name)
                 return data;
             } else {
                 throw new Error('Error fetching geo location');
@@ -117,7 +121,7 @@ const Home = () => {
                     cityName: data.name,
                     temperature: `${Math.round((data.main.temp - 273.15) * 9/5 + 32)}°F`,
                     description: data.weather[0].description,
-                    humidity: `${data.main.humidity}%`
+                    humidity: `${data.main.humidity}%`,
                 };
             } else {
                 throw new Error('Error fetching weather data');
@@ -134,15 +138,15 @@ const Home = () => {
                 <div className='newsContainer'>
                     <h2>Weather News</h2>
                     <ul className='newsUl'>
-                        {scienceNews.map((item, index) => (
-                            <li key={index}>
-                                <a href={item.link} target="_blank" rel="noopener noreferrer">
-                                <img src={item.pagemap.cse_image && item.pagemap.cse_image.length > 0 ? item.pagemap.cse_image[0].src : altimage} alt={altimage} />
-                                    <h2>{item.title}</h2>
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
+                    {scienceNews.map((item, index) => (
+                        <li key={index}>
+                            <a href={item.link} target="_blank" rel="noopener noreferrer">
+                                <img src={item.pagemap && item.pagemap.cse_image && item.pagemap.cse_image.length > 0 ? item.pagemap.cse_image[0].src : altimage} alt={altimage} />
+                                <h2>{item.title}</h2>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
                 </div>
                 <div className='weatherContainer'>
                     <form onSubmit={handleSubmit}>
@@ -161,14 +165,18 @@ const Home = () => {
                     {loading ? (
                         <p>Loading...</p>
                     ) : (
-                        <div>
-                            <h2>Weather Information</h2>
-                            <p>City: {cityName}</p>
-                            <p>Temperature: {temperature}</p>
-                            <p>Description: {description}</p>
-                            <p>Humidity: {humidity}</p>
-                        </div>
+                        <>
+                            <div>
+                                <h2>Weather Information</h2>
+                                <p>City: {cityName}</p>
+                                <p>Temperature: {temperature}</p>
+                                <p>Description: {description}</p>
+                                <p>Humidity: {humidity}</p>
+                            </div>
+                            <h2 className='state'>{state}</h2>
+                        </>  
                     )}
+
                     <MapComponent latitude={latitude} longitude={longitude} />
                 </div>
             </section>
