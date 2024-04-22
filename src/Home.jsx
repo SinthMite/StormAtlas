@@ -99,7 +99,6 @@ const Home = () => {
             const response = await fetch(urlGeo);
             if (response.ok) {
                 const data = await response.json();
-                console.log(data)
                 setState(data.name)
                 return data;
             } else {

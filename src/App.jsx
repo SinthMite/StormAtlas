@@ -54,7 +54,7 @@ function App() {
             <Route path="/StormAtlas/trend-analysis" element={<TrendAnalysisPage />} />
           </Routes>
         </div>
-        <Footer />
+        <Footer toggleDropdown={toggleDropdown} showDropdown={showDropdown} dropdownRef={dropdownRef} DropDown={DropDown} />
       </div>
     </Router>
   );
