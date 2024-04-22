@@ -90,15 +90,6 @@ const EarthquakePage = () => {
 
         return null;
     }
-    useEffect(() => {
-        // Function to update radius gradually
-        const interval = setInterval(() => {
-            // Increase radius up to a maximum value (e.g., 50)
-            setRadius(prevRadius => prevRadius < 50 ? prevRadius + 1 : 10);
-        }, 100); // Update every 100 milliseconds
-
-        return () => clearInterval(interval); // Cleanup function to clear interval
-    }, []); // Run only once on component mount
 
     return (
         <div className='EarthPage'>

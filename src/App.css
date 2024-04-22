@@ -11,20 +11,22 @@
 }
 
 header {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+
   padding: 4rem;
   background-image: linear-gradient(45deg, #31E08D,#31BFE0);
   background-position: center;
   background-size: 100rem;
   border-radius: 0rem 0rem 1rem 1rem;
+  flex-wrap: wrap;
+  position: sticky;
+  z-index: 10000000;
 }
 .headerDiv{
   display: flex;  
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+
 }
 .headerbutton button{
   color: hsla(0, 0%, 100%);
@@ -52,14 +54,16 @@ footer{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 80%;
 }
 
-.dropDown{
-  position: absolute;
-  z-index: 100000;
-  transform: translate(-50%);
-  top: 20%;
+.dropDown {
+  position: absolute; /* or fixed */
+  top: 100%; /* Adjust this value to position the dropdown below the header */
+  left: 50%; /* Adjust this value if needed */
+  transform: translateX(-50%);
+  z-index: 9999; /* Ensure a lower z-index value compared to the header */
   padding: 20px;
   background-color: #465C61;
   font-size: 4rem;
