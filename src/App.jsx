@@ -39,7 +39,7 @@ function App() {
         <header>
           <div className='headerDiv'>
             <div className='logoSide'>
-              <h1>StormAtlas</h1>
+              <h1 className='title'>StormAtlas</h1>
             </div>
             <div className='headerbutton'>
               <Link to="/StormAtlas"><button >Home</button></Link>

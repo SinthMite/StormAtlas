@@ -35,12 +35,8 @@ header {
 #OptionButton{
   background-color: #ef5f22;
 }
-#logo{
-  width: 100px;
-  height: 100px;
-}
-.logoSide{
-  margin-right: 2rem;
+.title{
+  color: white;
 }
 
 
