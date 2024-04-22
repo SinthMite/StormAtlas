@@ -4,18 +4,19 @@
 
 .EarthQuakeContainer {
     position: relative; /* Ensure that the container is positioned relative */
-
+    margin-bottom: 2rem;
 }
 
 .EarthquakeList {
     position: absolute; /* Position the list absolutely within the container */
-    top: 0; /* Align the list to the top of the container */
+    bottom: 0; /* Align the list to the top of the container */
     left: 0; /* Align the list to the left of the container */
     z-index: 10000; /* Ensure the list is stacked above the map */
     padding: 10px; /* Add padding to the list */
-    border-radius: 5px; /* Add border-radius for styling */
     list-style-type: none; /* Remove default list styles */
-
+    width: 100%;
+    background-image: linear-gradient(45deg, #31E08D,#31BFE0);
+    border: none;
 }
 
 .EarthquakeList li {

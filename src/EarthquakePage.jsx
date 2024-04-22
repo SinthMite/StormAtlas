@@ -47,19 +47,16 @@ const EarthquakePage = () => {
             return <p>No significant earthquakes found.</p>;
         }
         return (
-            <ul className="EarthquakeList">
+            <select className="EarthquakeList" onChange={(e) => handleButtonClick(earthquakeData[e.target.value], setMapCenter)}>
                 {earthquakeData.map((quake, index) => (
-                    <li key={index}>
-                        <button onClick={() => handleButtonClick(quake, setMapCenter)}>
-                            <h3>{quake.properties.title}</h3>
-                            <p>{quake.properties.place}</p>
-                        </button>
-                    </li>
+                    <option key={index} value={index}>
+                        {quake.properties.title} - {quake.properties.place}
+                    </option>
                 ))}
-            </ul>
+            </select>
         );
     };
-
+    
     function PanToMarkerHour() {
         const map = useMap();
         useEffect(() => {
