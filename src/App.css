@@ -1,8 +1,5 @@
 #root {
-  max-width: 1280px;
-  display: flex;
-  justify-content:center;
-  align-items: center;
+  max-width: 2560px;
 }
 *{
   margin: 0;
@@ -10,34 +7,13 @@
   box-sizing: border-box;
 }
 
-header {
-
-  padding: 4rem;
-  background-image: linear-gradient(45deg, #4a4a4a,#421024);
-  background-position: center;
-  background-size: 100rem;
-  border-radius: 0rem 0rem 1rem 1rem;
-  flex-wrap: wrap;
-  position: sticky;
-  z-index: 10000000;
+header{
+  padding: 20px;
 }
 .headerDiv{
-  display: flex;  
-  justify-content: space-between;
+  display: flex;
+  justify-content: space-around;
   align-items: center;
-  flex-wrap: wrap;
-
-}
-.headerbutton button{
-  color: hsla(0, 0%, 100%);
-  background-color: transparent;
-}
-#OptionButton{
-  background-color: rgb(255, 0, 89);
-}
-.title{
-  color: white;
-  cursor:default;
 }
 
 

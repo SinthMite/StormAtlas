@@ -1,20 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
-import Home from './Home.jsx'; // Import the combined Home component
-import Footer from './Footer.jsx';
-import EarthquakePage from './EarthquakePage.jsx';
-import TrendAnalysisPage from './TrendAnalysisPage.jsx';
-import AboutPage from './AboutPage.jsx';
+import Home from './components/Home.jsx'; // Import the combined Home component
+import Footer from './components/Footer.jsx';
+import AboutPage from './components/AboutPage.jsx';
 
 function App() {
   const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
 
-  // Function to handle click outside dropdown
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setShowDropdown(false);
@@ -28,8 +26,6 @@ function App() {
     };
   }, []);
 
-  const dropdownRef = useRef(null);
-
   return (
     <Router>
       <div className='homePage'>
@@ -39,8 +35,7 @@ function App() {
               <h1 className='title'>StormAtlas</h1>
             </div>
             <div className='headerbutton'>
-              <Link to="/StormAtlas"><button >Home</button></Link>
-              <button onClick={toggleDropdown} id='OptionButton'>Options</button>
+              <Link to="/StormAtlas"><button>Home</button></Link>
               {showDropdown && <DropDown dropdownRef={dropdownRef} />}
               <Link to="/StormAtlas/about"><button>About</button></Link>
             </div>
@@ -48,13 +43,11 @@ function App() {
         </header>
         <div className='homeComponent'>
           <Routes>
-            <Route path="/StormAtlas" element={<Home />} /> {/* Use the combined Home component */}
+            <Route path="/StormAtlas" element={<Home />} />
             <Route path="/StormAtlas/about" element={<AboutPage />} />
-            <Route path="/StormAtlas/earthquake" element={<EarthquakePage />} />
-            <Route path="/StormAtlas/trend-analysis" element={<TrendAnalysisPage />} />
           </Routes>
         </div>
-        <Footer toggleDropdown={toggleDropdown} showDropdown={showDropdown} dropdownRef={dropdownRef} DropDown={DropDown} />
+        <Footer />
       </div>
     </Router>
   );
@@ -64,8 +57,8 @@ function DropDown({ dropdownRef }) {
   return (
     <div ref={dropdownRef} className='dropDown'>
       <ul className='dropDownList'>
-        <li><Link className='linkItem' to="/StormAtlas/earthquake">Earthquake</Link></li>
-        <li><Link className='linkItem' to="/StormAtlas/trend-analysis">Trend Analysis</Link></li>
+        <li><Link className='linkItem' to="/StormAtlas">Home</Link></li>
+        <li><Link className='linkItem' to="/StormAtlas/about">About</Link></li>
       </ul>
     </div>
   );

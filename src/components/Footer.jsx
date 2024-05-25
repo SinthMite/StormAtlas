@@ -1,7 +1,6 @@
 import React from 'react';
-import Logo from './assets/Logo.svg';
+import { Link } from 'react-router-dom';
 import './Footer.css';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -11,10 +10,8 @@ const Footer = () => {
           <h1>StormAtlas</h1>
         </div>
         <div className='footerLinks'>
-        <Link to="/StormAtlas"><button >Home</button></Link>
-        <Link to="/StormAtlas/earthquake"><button>EarthQuake</button></Link>
-        <Link to="/StormAtlas/trend-analysis"><button>Trend Analysis</button></Link>
-        <Link to="/StormAtlas/about"><button>About</button></Link>
+          <Link to="/StormAtlas"><button>Home</button></Link>
+          <Link to="/StormAtlas/about"><button>About</button></Link>
         </div>
       </div>
       <div className="footerBottom">
