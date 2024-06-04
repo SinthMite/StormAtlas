@@ -1,53 +1,306 @@
-#root {
-  max-width: 2560px;
+:root {
+  --gradient-color-1: #FFD700; /* Gold */
+  --gradient-color-2: #FF8C00; /* Dark Orange */
+  --gradient-color-3: #FF69B4; /* Hot Pink */
+  --gradient-color-4: #87CEFA; /* Light Sky Blue */
+  --gradient-color-5: #FFB6C1; /* Light Pink */
+  --gradient-angle: 45deg;
 }
-*{
+
+@keyframes gradient-border-animation {
+  0% {
+    border-color: var(--gradient-color-1);
+  }
+  10% {
+    border-color: #FFB300; /* Intermediate Color */
+  }
+  20% {
+    border-color: var(--gradient-color-2);
+  }
+  30% {
+    border-color: #FF77A1; /* Intermediate Color */
+  }
+  40% {
+    border-color: var(--gradient-color-3);
+  }
+  50% {
+    border-color: #D49FD8; /* Intermediate Color */
+  }
+  60% {
+    border-color: var(--gradient-color-4);
+  }
+  70% {
+    border-color: #AFD6E3; /* Intermediate Color */
+  }
+  80% {
+    border-color: var(--gradient-color-5);
+  }
+  90% {
+    border-color: #FFC8E0; /* Intermediate Color */
+  }
+  100% {
+    border-color: var(--gradient-color-1);
+  }
+}
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-header{
+header {
   padding: 20px;
+  width: 100%;
 }
-.headerDiv{
+
+.logo {
+  width: 200px;
+}
+
+.headerDiv {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
+.headerbutton {
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
+}
 
-footer{
+
+.headerbutton button {
+  position: relative;
+  padding: 10px 20px;
+  border: 2px solid transparent;
+  background: none;
+  color: rgb(255, 255, 255);
+  z-index: 1;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  background: linear-gradient(
+    var(--gradient-angle),
+    var(--gradient-color-1),
+    var(--gradient-color-2),
+    var(--gradient-color-3),
+    var(--gradient-color-4),
+    var(--gradient-color-5)
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: var(--webkit-background-clip);
+  background-clip: var(--background-clip);
+  animation: gradient-animation 10s infinite ease-in-out;
+}
+
+.headerbutton button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 2px;
+  border: 2px solid transparent;
+  background: linear-gradient(
+    var(--gradient-angle),
+    var(--gradient-color-1),
+    var(--gradient-color-2),
+    var(--gradient-color-3),
+    var(--gradient-color-4),
+    var(--gradient-color-5)
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  background-size: 200% 200%;
+  animation: gradient-animation 10s infinite ease-in-out;
+  pointer-events: none; /* Allow clicks to pass through to the button */
+  z-index: -1; /* Ensure the pseudo-element is behind the button text */
+}
+
+footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
+
 .homePage {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  position: relative;
 }
 
-.dropDown {
-  position: absolute; /* or fixed */
-  top: 100%; /* Adjust this value to position the dropdown below the header */
-  left: 50%; /* Adjust this value if needed */
-  transform: translateX(-50%);
-  z-index: 9999; /* Ensure a lower z-index value compared to the header */
-  padding: 20px;
-  background-color: hsla(0, 0%, 0%, 0.8);
-  font-size: 4rem;
-  color: white;
-}
-ul{
+ul {
   list-style-type: none;
 }
+
 .linkItem {
   color: rgb(255, 255, 255); /* Change 'blue' to whatever color you desire */
   text-decoration: none; /* Remove underline from links */
 }
-.weatherContainer{
+
+.weatherContainer {
   transform: translate(10%);
+}
+
+.weatherContainer, .newsContainer {
+  background-color: var(--light-green);
+  border-radius: 10px;
+  padding: 1rem;
+  width: 45%;
+  position: relative;
+  border: 1px solid;
+  animation: gradient-border-animation 10s infinite ease-in-out;
+}
+
+.weatherContainer input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--dark-green);
+  border-radius: 5px;
+  outline: none;
+}
+
+.weatherContainer button {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: var(--dark-green);
+  border: none;
+  border-radius: 5px;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.weatherContainer button:disabled {
+  background-color: var(--light-green);
+  cursor: not-allowed;
+}
+
+.newsContainer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.newsContainer ul li {
+  display: flex;
+  gap: 1rem;
+}
+
+.newsContainer ul li img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.newsContainer ul li h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+}
+
+.EarthQuakeContainer {
+  margin: 2rem 0;
+}
+
+.EarthquakeList {
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  z-index: 10000; 
+  padding: 10px; 
+  list-style-type: none; 
+  width: 100%;
+  border: none;
+  color: white;
+  background: linear-gradient(
+    var(--gradient-angle),
+    var(--gradient-color-1),
+    var(--gradient-color-2),
+    var(--gradient-color-3),
+    var(--gradient-color-4),
+    var(--gradient-color-5)
+  );
+  background-size: 200% 200%;
+  animation: gradient-border-animation 10s infinite ease-in-out;
+}
+
+footer {
+  background-color: var(--dark-green);
+  color: var(--white);
+  text-align: center;
+  padding: 1rem;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.EarthPage h1, .EarthPage h2 {
+  color: #ffffff;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.weeklyEarthQuakeSection p {
+  color: #ffffff;
+}
+
+.PosterImage {
+  width: 50%;
+  position: relative;
+  transform: translate(50%);
+}
+
+.PosterText h1 {
+  font-size: 6rem; 
+  margin: 0;
+}
+
+.PosterText span {
+  background: linear-gradient(
+    var(--gradient-angle),
+    var(--gradient-color-1),
+    var(--gradient-color-2),
+    var(--gradient-color-3),
+    var(--gradient-color-4),
+    var(--gradient-color-5)
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: var(--webkit-background-clip);
+  background-clip: var(--background-clip);
+  color: var(--text-color);
+  animation: gradient-animation 10s infinite ease-in-out;
+}
+
+.PosterText p {
+  font-size: 1rem;
+  margin: 40px 0px;
+  text-align: justify;
+}
+
+.about {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  background-color: white;
+  padding: 2rem 4rem;
+  border-radius: 2rem;
 }

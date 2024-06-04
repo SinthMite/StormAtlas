@@ -1,16 +1,21 @@
-:root {
-  --dark-green: #2f4f4f;
-  --light-green: #8fbc8f;
-  --pale-green: #f9fff9;
-  --white: #ffffff;
-  --red: #ff6347;
+
+@keyframes gradient-border-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: var(--pale-green);
+  background-color: black;
   color: var(--dark-green);
 }
 
@@ -49,17 +54,63 @@ body {
   justify-content: space-between;
   padding: 4rem 2rem;
   flex-wrap: wrap;
-  box-shadow: -1rem -1rem 10rem hsla(0, 0%, 0%, 0.6);
-
 }
 
 .weatherContainer, .newsContainer {
   background-color: var(--light-green);
   border-radius: 10px;
   padding: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 45%;
+  position: relative;
+  color: white;
 }
+.weatherContainer button{
+  border: 1px solid white;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 20px;
+}
+.newsContainer{
+  width: 30%;
+}
+.weatherContainer{
+  width: 60%;
+}
+.weatherContainer::before, .newsContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 10px;
+  border: 4px solid transparent;
+  background: linear-gradient(
+    var(--gradient-angle),
+    var(--gradient-color-1),
+    #FFB300, /* Intermediate Gold */
+    var(--gradient-color-2),
+    #FF77A1, /* Intermediate Hot Pink */
+    var(--gradient-color-3),
+    #D49FD8, /* Intermediate Light Purple */
+    var(--gradient-color-4),
+    #AFD6E3, /* Intermediate Light Sky Blue */
+    var(--gradient-color-5),
+    #FFC8E0, /* Intermediate Light Pink */
+    var(--gradient-color-1)
+  );
+
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  background-size: 200% 200%;
+  animation: gradient-border-animation 10s infinite ease-in-out;
+  z-index: 1; /* Ensure the pseudo-element is above the content */
+  pointer-events: none; /* Allow clicks to pass through to the container */
+}
+
 
 .weatherContainer input {
   width: 100%;
@@ -109,6 +160,8 @@ body {
 .newsContainer ul li h2 {
   margin: 0;
   font-size: 1rem;
+  font-weight: 500;
+  color: white;
 }
 
 .EarthQuakeContainer {
@@ -116,7 +169,32 @@ body {
 }
 
 .EarthquakeList {
-  margin-bottom: 1rem;
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  z-index: 10000; 
+  padding: 10px; 
+  list-style-type: none; 
+  width: 100%;
+  border: none;
+  color: white;
+  background: linear-gradient(
+    var(--gradient-angle),
+    var(--gradient-color-1),
+    #FFB300, /* Intermediate Gold */
+    var(--gradient-color-2),
+    #FF77A1, /* Intermediate Hot Pink */
+    var(--gradient-color-3),
+    #D49FD8, /* Intermediate Light Purple */
+    var(--gradient-color-4),
+    #AFD6E3, /* Intermediate Light Sky Blue */
+    var(--gradient-color-5),
+    #FFC8E0, /* Intermediate Light Pink */
+    var(--gradient-color-1)
+  );
+
+  background-size: 200% 200%;
+  animation: gradient-border-animation 10s infinite ease-in-out;
 }
 
 footer {
@@ -132,7 +210,6 @@ footer {
   align-items: center;
 }
 
-
 .EarthPage h1, .EarthPage h2 {
   color: #ffffff;
   font-weight: 800;
@@ -140,85 +217,48 @@ footer {
   text-align: center;
 }
 
-.EarthQuakeContainer {
-  position: relative; /* Ensure that the container is positioned relative */
-  margin-bottom: 2rem;
-}
-
-.EarthquakeList {
-  position: absolute; /* Position the list absolutely within the container */
-  bottom: 0; /* Align the list to the top of the container */
-  left: 0; /* Align the list to the left of the container */
-  z-index: 10000; /* Ensure the list is stacked above the map */
-  padding: 10px; /* Add padding to the list */
-  list-style-type: none; /* Remove default list styles */
-  width: 100%;
-  background-image: linear-gradient(45deg, #4caf50, #8bc34a); /* Green gradient */
-  border: none;
-  color: white;
-}
-
-.EarthquakeList li {
-  margin-bottom: 10px; /* Add margin between list items */
-}
-
-.EarthquakeList button {
-  background-color: #4caf50; /* Add background color for buttons */
-  color: #fff; /* Add text color for buttons */
-  border: none; /* Remove button border */
-  padding: 5px 10px; /* Add padding to buttons */
-  border-radius: 5px; /* Add border-radius for styling */
-  cursor: pointer; /* Change cursor to pointer on hover */
-  display: block; /* Make buttons block-level elements */
-  width: 100%; /* Make buttons fill the width of the list */
-  text-align: left; /* Align button text to the left */
-}
-
-.EarthquakeList button:hover {
-  background-color: #388e3c; /* Change background color on hover */
-}
-
 .weeklyEarthQuakeSection p {
   color: #ffffff;
 }
 
-.EarthQuakeMaps{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
 .PosterImage {
+  width: 50%;
   position: relative;
-  text-align: left; /* Align text to the left */
-  color: white;
-  margin: 0rem 3rem;
-}
-
-.PosterImage img {
-  width: 100%;
-  border-radius: 2rem 3rem 0rem 0rem;
-
-}
-
-.PosterText {
-  position: absolute;
-  top: 30%;
-  left: 10%; /* Position text 10% from the left */
-  transform: translateY(-50%);
-  width: 40%;
-  color: white;
-  text-align: left;
+  transform: translate(50%);
 }
 
 .PosterText h1 {
-  font-size: 6rem; /* Increase the font size of the heading */
+  font-size: 6rem; 
   margin: 0;
 }
 
+.PosterText span {
+  background: linear-gradient(
+    var(--gradient-angle),
+    var(--gradient-color-1),
+    #FFB300, /* Intermediate Gold */
+    var(--gradient-color-2),
+    #FF77A1, /* Intermediate Hot Pink */
+    var(--gradient-color-3),
+    #D49FD8, /* Intermediate Light Purple */
+    var(--gradient-color-4),
+    #AFD6E3, /* Intermediate Light Sky Blue */
+    var(--gradient-color-5),
+    #FFC8E0, /* Intermediate Light Pink */
+    var(--gradient-color-1)
+  );
+
+  background-size: 200% 200%;
+  -webkit-background-clip: var(--webkit-background-clip);
+  background-clip: var(--background-clip);
+  color: var(--text-color);
+  animation: gradient-border-animation 10s infinite ease-in-out;
+}
+
 .PosterText p {
-  font-size:1rem; /* Adjust the font size of the paragraph if needed */
+  font-size: 1rem;
   margin: 40px 0px;
+  text-align: justify;
 }
 
 .about {
@@ -228,4 +268,12 @@ footer {
   background-color: white;
   padding: 2rem 4rem;
   border-radius: 2rem;
+}
+
+
+input::placeholder{
+  color: black;
+}
+input{
+  color: black;
 }

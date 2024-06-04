@@ -1,52 +1,119 @@
-.footer {
-background-color: rgb(66, 85, 60);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    color: #fff;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: center;
-    margin-top: 2rem;
+:root {
+  --gradient-angle: 45deg;
+  --webkit-background-clip: text;
+  --background-clip: text;
+  --text-color: transparent;
+}
 
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
   }
-  
-  .footerContent {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  50% {
+    background-position: 100% 50%;
   }
-  
-  .logoContainer {
-    display: flex;
-    align-items: center;
+  100% {
+    background-position: 0% 50%;
   }
-  
-  .logoContainer img {
-    margin-right: 10px;
-  }
-  
-  .footerLinks button {
-    color: #fff;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin-left: 20px;
-  }
-  
-  .footerLinks button:hover {
-    text-decoration: underline;
-  }
-  
-  .footerBottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .footerBottom p {
-    margin: 0;
-  }
-  
+}
+
+.gradient-animation {
+  background: linear-gradient(
+    var(--gradient-angle),
+    var(--gradient-color-1),
+    #FFB300, /* Intermediate Gold */
+    var(--gradient-color-2),
+    #FF77A1, /* Intermediate Hot Pink */
+    var(--gradient-color-3),
+    #D49FD8, /* Intermediate Light Purple */
+    var(--gradient-color-4),
+    #AFD6E3, /* Intermediate Light Sky Blue */
+    var(--gradient-color-5),
+    #FFC8E0, /* Intermediate Light Pink */
+    var(--gradient-color-1)
+  );
+
+  background-size: 200% 200%;
+  -webkit-background-clip: var(--webkit-background-clip);
+  background-clip: var(--background-clip);
+  color: var(--text-color);
+  animation: gradient-animation 10s infinite ease-in-out;
+}
+
+.footer {
+  background-color: rgb(0, 0, 0);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logoContainer h2 {
+  font-size: 3rem;
+}
+
+.logoContainer span {
+  background: linear-gradient(
+    var(--gradient-angle),
+    var(--gradient-color-1),
+    #FFB300, /* Intermediate Gold */
+    var(--gradient-color-2),
+    #FF77A1, /* Intermediate Hot Pink */
+    var(--gradient-color-3),
+    #D49FD8, /* Intermediate Light Purple */
+    var(--gradient-color-4),
+    #AFD6E3, /* Intermediate Light Sky Blue */
+    var(--gradient-color-5),
+    #FFC8E0, /* Intermediate Light Pink */
+    var(--gradient-color-1)
+  );
+
+  background-size: 200% 200%;
+  -webkit-background-clip: var(--webkit-background-clip);
+  background-clip: var(--background-clip);
+  color: var(--text-color);
+  animation: gradient-animation 10s infinite ease-in-out;
+}
+
+.logoContainer img {
+  margin-right: 10px;
+}
+
+.footerLinks button {
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 20px;
+}
+
+.footerLinks button:hover {
+  text-decoration: underline;
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.footerBottom p {
+  margin: 0;
+}

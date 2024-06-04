@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="footer">
       <div className='footerContent'>
         <div className='logoContainer'>
-          <h1>StormAtlas</h1>
+          <h2>Storm<span>Atlas</span></h2>
         </div>
         <div className='footerLinks'>
           <Link to="/StormAtlas"><button>Home</button></Link>

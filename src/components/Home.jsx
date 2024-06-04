@@ -5,7 +5,7 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import 'leaflet-defaulticon-compatibility';
 import './Home.css';
 import altimage from '../assets/alt.jpg';
-import earthquakeimage from '../assets/BackGroundImage.webp';
+import earthquakeimage from '../assets/BackGround.mp4';
 
 const API_KEY_OPENWEATHERMAP = 'c02c81c69aeca3d86e9118215a9f3cca';
 const API_KEY_NEWSAPI = 'pub_4209530ee2e4b7b0baaf460bdb8c7b4869283';
@@ -61,7 +61,7 @@ const Home = () => {
     const fetchNews = async () => {
       const apiKey = 'AIzaSyCKSPy_djrq8jIcAWBLnKq2L4X-rs_dylU';
       const searchEngineId = 'f362cbcad97df4478';
-      const weatherCondition = `hurricane ${zipCode} OR tornado ${zipCode} OR earthquake ${zipCode} OR flood ${zipCode} OR wildfire ${zipCode} OR tsunami ${zipCode} OR avalanche ${zipCode} OR blizzard ${zipCode} OR drought ${zipCode} OR heatwave ${zipCode} OR cyclone ${zipCode} OR landslide ${zipCode} OR volcano eruption ${zipCode} OR weather forecast ${zipCode} OR weather news ${zipCode} OR climate change ${zipCode} OR meteorology ${zipCode} OR weather patterns ${zipCode} OR atmospheric conditions ${zipCode} OR extreme weather events ${zipCode} OR weather alerts ${zipCode} OR severe weather ${zipCode}`;
+      const weatherCondition = `weather forecast ${zipCode} OR weather news ${zipCode} OR climate change ${zipCode} OR extreme weather events ${zipCode} OR weather alerts ${zipCode} OR severe weather ${zipCode}`;
       const searchTerm = `${weatherCondition} ${zipCode} -filetype:htm`;
 
       if (zipCode.length === 5 && /^\d+$/.test(zipCode)) {
@@ -183,16 +183,11 @@ const Home = () => {
   return (
     <div className='mainDiv'>
         <section className='PosterImage'>
-            <img src={earthquakeimage} alt="" />
             <div className='PosterText'>
-                <h1>StormAtlas</h1>
+                <h1>Storm<span>Atlas</span></h1>
                 <p>StormAtlas is your trusted source for comprehensive information on natural disasters and weather phenomena. We aim to empower communities with real-time data, expert insights, and practical advice to help you stay informed and safe during extreme weather events.</p>
             </div>
-            <div className='about'>
-                <a href='/StormAtlas/about' className='button-link'>
-                    About Us
-                </a>
-            </div>
+
         </section>
       <section className='basicInfo'>
         <div className='weatherContainer'>
@@ -208,7 +203,6 @@ const Home = () => {
               {loading ? 'Loading...' : 'Submit'}
             </button>
           </form>
-          {error && <p className="error">{error}</p>}
           {loading ? (
             <p>Loading...</p>
           ) : (
