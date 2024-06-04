@@ -189,49 +189,49 @@ const Home = () => {
             </div>
 
         </section>
-      <section className='basicInfo'>
-        <div className='weatherContainer'>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              value={zipCode}
-              onChange={handleChange}
-              placeholder="Enter ZIP code"
-              id='homeWeather'
-            />
-            <button type="submit" disabled={loading}>
-              {loading ? 'Loading...' : 'Submit'}
-            </button>
-          </form>
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
-            <>
-              <div>
-                <h2>Weather Information</h2>
-                <p>Temperature: {temperature}</p>
-                <p>Description: {description}</p>
-                <p>Humidity: {humidity}</p>
-              </div>
-              <h2 className='state'>{state}</h2>
-            </>
-          )}
-          <MapComponent latitude={latitude} longitude={longitude} />
+        <section className='basicInfo'>
+  <div className='weatherContainer'>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={zipCode}
+        onChange={handleChange}
+        placeholder="Enter ZIP code"
+        id='homeWeather'
+      />
+      <button type="submit" disabled={loading}>
+        {loading ? 'Loading...' : 'Submit'}
+      </button>
+    </form>
+    {loading ? (
+      <p>Loading...</p>
+    ) : (
+      <>
+        <div>
+          <h2>Weather Information</h2>
+          <p>Temperature: {temperature}</p>
+          <p>Description: {description}</p>
+          <p>Humidity: {humidity}</p>
         </div>
-        <div className='newsContainer'>
-          <h2>Weather News</h2>
-          <ul className='newsUl'>
-            {scienceNews.map((item, index) => (
-              <li key={index}>
-                <a href={item.link} target="_blank" rel="noopener noreferrer">
-                  <img src={item.pagemap && item.pagemap.cse_image && item.pagemap.cse_image.length > 0 ? item.pagemap.cse_image[0].src : altimage} alt={altimage} />
-                  <h2>{item.title}</h2>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+        <h2 className='state'>{state}</h2>
+      </>
+    )}
+    <MapComponent latitude={latitude} longitude={longitude} />
+  </div>
+  <div className='newsContainer'>
+    <h2>Weather News</h2>
+    <ul className='newsUl'>
+      {scienceNews.map((item, index) => (
+        <li key={index}>
+          <a href={item.link} target="_blank" rel="noopener noreferrer">
+            <img src={item.pagemap && item.pagemap.cse_image && item.pagemap.cse_image.length > 0 ? item.pagemap.cse_image[0].src : altimage} alt={altimage} />
+            <h2>{item.title}</h2>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
       <section className='EarthQuakeMaps'>
       <section>
         <h2>Earthquakes within the last hour</h2>

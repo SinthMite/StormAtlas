@@ -51,18 +51,43 @@ body {
 
 .basicInfo {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 4rem 2rem;
   flex-wrap: wrap;
+  align-items: stretch;
+  flex-direction: row-reverse;
 }
 
 .weatherContainer, .newsContainer {
   background-color: var(--light-green);
   border-radius: 10px;
   padding: 1rem;
-  width: 45%;
   position: relative;
   color: white;
+}
+
+
+@media (min-width:769px){
+  .weatherContainer {
+  flex: 0 1 60%;
+}
+
+.newsContainer {
+  flex: 0 1 30%;
+}
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .basicInfo {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .weatherContainer, .newsContainer {
+    width: 100%;
+    flex: 1 1 100%;
+  }
 }
 .weatherContainer button{
   border: 1px solid white;
@@ -70,12 +95,7 @@ body {
   font-size: 16px;
   margin-left: 20px;
 }
-.newsContainer{
-  width: 30%;
-}
-.weatherContainer{
-  width: 60%;
-}
+
 .weatherContainer::before, .newsContainer::before {
   content: '';
   position: absolute;
@@ -228,7 +248,7 @@ footer {
 }
 
 .PosterText h1 {
-  font-size: 6rem; 
+  font-size: 8vw;
   margin: 0;
 }
 

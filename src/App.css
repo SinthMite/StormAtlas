@@ -69,12 +69,12 @@ header {
   display: flex;
   justify-content: space-around;
   width: 30%;
+  flex-wrap: wrap;
 }
 
 
 .headerbutton button {
   position: relative;
-  padding: 10px 20px;
   border: 2px solid transparent;
   background: none;
   color: rgb(255, 255, 255);

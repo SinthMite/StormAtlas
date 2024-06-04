@@ -106,11 +106,19 @@
 .footerLinks button:hover {
   text-decoration: underline;
 }
+.footerContent{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
 
 .footerBottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   margin-top: 20px;
 }
 
